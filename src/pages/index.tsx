@@ -255,6 +255,10 @@ const HomePage: React.FC<StoryListProps> = ({ stories }) => {
                     <div className="title-list">TRUYỆN HOÀN THÀNH</div>
                     <StoryList stories={stories} />
                 </div>
+                <div className="full-story">
+                    <div className="title-list">TRUYỆN CẬP NHẬT</div>
+                    <StoryList stories={stories} />
+                </div>
             </div>
         </main>
         </body>
