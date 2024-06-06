@@ -1,0 +1,216 @@
+.dropstart .btn-ship-info {
+    &:before {
+        display: none;
+    }
+}
+
+.dropdown-dark {
+    background: none;
+    box-shadow: none;
+}
+
+.dropup-center .dropdown-toggle::after {
+    display: none;
+}
+
+.dropup {
+    @media (min-width: 992px) {
+        .dropdown-menu.show {
+            display: none !important;
+        }
+
+        &:hover,
+        &:focus {
+            .dropdown-menu {
+                display: block !important;
+                position: absolute;
+
+                &.show {
+                    display: block !important;
+                }
+            }
+        }
+    }
+}
+
+.dropdown-top {
+    .convertREm(min-width, 262px);
+    transform: translate(-94%, 5px) !important;
+    left: 100% !important;
+    top: auto !important;
+    bottom: 100% !important;
+
+    &:before {
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-bottom: 0;
+        border-right: 0.5em solid transparent;
+        border-top: 0.5em solid;
+        border-left: 0.5em solid transparent;
+        position: absolute;
+        right: 22px;
+        bottom: 1px;
+
+        @media (max-width: 991.96px) {
+            right: 18px;
+        }
+
+    }
+
+    &.t-md {
+        .convertREm(min-width, 294px);
+
+        @media (max-width: 991.96px) {
+            .convertREm(min-width, 274px);
+        }
+    }
+
+    &.t-lg {
+        .convertREm(min-width, 320px);
+
+        @media (max-width: 991.96px) {
+            .convertREm(min-width, 254px);
+        }
+    }
+
+    &.tl-pos {
+        @media (max-width: 991.96px) {
+            transform: translate(-15px, 5px) !important;
+            left: 0 !important;
+
+            &.show {}
+
+            &:before {
+                right: auto;
+                left: 17px;
+            }
+        }
+
+    }
+
+    &.bc-pos {
+        transform: translate(-50%, -5px) !important;
+        bottom: auto !important;
+        top: 100% !important;
+        &:before {
+            bottom: auto;
+            top: 0;
+            right: 50%;
+            margin-right: 6px;
+            transform: rotate(180deg);
+        }
+    }
+    &.lb-pos {
+        transform: translate(-108%, -5px) !important;
+		bottom: auto !important;
+		top: -4% !important;
+        &:before {
+            bottom: auto;
+            top: 21px;
+            right: -3px;
+            margin-right: 0;
+            transform: rotate(-90deg);
+        }
+    }
+}
+
+.dropdown-left {
+    .convertREm(min-width, 474px);
+    top: 50% !important;
+    &:before {
+        display: inline-block;
+        margin-right: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-top: 0.5em solid transparent;
+        border-left: 0.5em solid;
+        border-bottom: 0.5em solid transparent;
+        position: absolute;
+        right: -3px;
+        top: 50%;
+        transform: translate(0, -50%)
+    }
+
+    &.show {
+        transform: translate(-30px, -50%) !important;
+    }
+}
+
+/*@media (min-width: 1200px) {
+	.dropstart:focus, .dropstart:hover {
+		.dropdown-left, .dropdown-left.show {
+		  	display: block !important;
+		  	position: absolute;
+		  	top: 50% !important;
+		  	transform: translate(-30px, -50%) !important;
+		}
+	}
+}*/
+@media (max-width: 1024px) {}
+
+@media (max-width: 991.98px) {
+    .dropdown-top {
+        .convertREm(min-width, 194px);
+    }
+
+    .dropdown-left {
+        .convertREm(min-width, 194px);
+    }
+}
+.checked-type-s{
+	padding-left: 0;
+	margin-bottom: 0;
+	li{
+		position: relative;
+		padding-left: 22px;
+		list-style: none;
+		.convertREm(margin-top, 5px);
+		li{
+			.convertREm(margin-top, 2px);
+		}
+	}
+	.icons{
+		position: absolute;
+		left: 0;
+		top: 3px;
+		z-index: 1;
+		.convertREm(width, 14px);
+		.convertREm(height, 14px);
+		background-size: 8px auto;
+	}
+}
+.tooltip{
+    font-family: @body-font;
+	.tooltip-inner{
+		.convertREm(max-width, 360px);
+		.convertREm(min-width, 200px);
+	}
+}
+.tooltip-inner {
+    background-color: rgba(0, 0, 0, .8);
+    padding-left: .75rem;
+    padding-right: .75rem;
+    text-align: left;
+}
+.tip-lg{
+	@media (min-width: 992px) {
+		max-width: 340px;
+	}
+}
+.tip-md{
+	@media (min-width: 992px) {
+		max-width: 260px;
+	}
+}
+.tip-sm{
+	@media (min-width: 992px) {
+		max-width: 220px;
+	}
+}
+.btn-tooltip{
+	&:hover, &:focus, &:active{
+		background: transparent !important;
+	}
+}

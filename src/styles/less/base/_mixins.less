@@ -1,0 +1,57 @@
+/*convert px to rem*/
+@remInPx: 16; // 16px per rem (global default)
+
+.convertREm(@selector, @amt) when (isrem(@amt)) {
+    @{selector}: @amt;
+}
+
+.convertREm(@selector, @amt, @remInPx: @remInPx) when (ispixel(@amt)) {
+    @{selector}: unit((@amt / @remInPx), rem);
+}
+
+/*****/
+.clearfix {
+    display: block;
+    zoom: 1;
+
+    &:after {
+        content: " ";
+        display: block;
+        font-size: 0;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}
+
+/* border-radius */
+.border-radius(@number...) {
+    -webkit-border-radius: @number;
+    -moz-border-radius: @number;
+    border-radius: @number;
+}
+
+/* placeholder */
+.placeholder(@val...) {
+    &::-webkit-input-placeholder {
+        color: @val;
+    }
+
+    &:-moz-placeholder {
+        color: @val;
+        opacity: 1;
+    }
+
+    &::-moz-placeholder {
+        color: @val;
+        opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+        color: @val;
+    }
+
+    &:placeholder {
+        color: @val;
+    }
+}

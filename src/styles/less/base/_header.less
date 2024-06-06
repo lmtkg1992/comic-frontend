@@ -1,0 +1,172 @@
+.header {
+    .container {
+      background-color: #14425d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+      height: 50px; /* Increase the height */
+      margin: 0 auto; /* Center container horizontally */
+      padding: 0 200px; /* Add some padding */
+       .logo {
+         display: flex;
+         width: 190px;
+         white-space: nowrap;
+         a {
+           //background-color: @blue-color;
+           font-family: 'Roboto Condensed',sans-serif;
+           font-style: normal;
+           font-weight: 500;
+           font-size: 25px;
+           line-height: 100%;
+           /* identical to box height, or 32px */
+           letter-spacing: -0.01em;
+           color: #fff;
+           text-decoration: none;
+         }
+       }
+        .header-nav  {
+          display: flex;
+          width: 100%;
+          ul {
+            display: flex;
+            list-style: none; /* Remove default list style */
+            margin: 0;
+            padding: 0;
+            li {
+              margin-left: 5px; /* Add some space between items */
+              white-space: nowrap;
+              a .header-nav-item {
+                  //width: 180px;
+                  .header-nav-item-text {
+                    //background-color: @yellow-color;
+                    font-family: 'Roboto Condensed',sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 17px;
+                    line-height: 130%;
+                    /* identical to box height, or 21px */
+                    align-items: center;
+                    text-align: center;
+                    text-decoration: none;
+                    color: #fff;
+
+                    position: relative;
+                    display: inline-block;
+                    padding: 10px 10px 10px 15px;
+                    &:before {
+                      font-family: 'Glyphicons Halflings';
+                      margin-right: 5px;
+                    }
+                  }
+                  .chevron {
+                    top : 3px;
+                    left : -10px;
+                    color : #fff;
+                  }
+                  &:hover {
+                    background-color: rgb(47, 86, 109);
+                  }
+              }
+            }
+          }
+
+          .dropdown:hover .dropdown-menu{
+              display: block;
+          }
+          .dropdown {
+             //width: 600px;
+            &:hover .dropdown-menu{
+              display: block;
+            }
+            .dropdown-menu {
+              position: absolute;
+              z-index: 1;
+              background-color: rgb(47, 86, 109);
+              display: none;
+              flex-wrap: nowrap;
+              //width: 500px;
+              margin: 0;
+              .dropdown-row {
+                display: flex;
+                flex-direction: row;
+                .dropdown-column {
+                  flex:1;
+                  padding: 10px;
+                  display: flex;
+                  flex-direction: column; /* Display items in a vertical column */
+                }
+                ul {
+                  list-style: none;
+                  padding: 10px;
+                  margin: 0;
+                  display: block;
+                  li {
+                    padding: 0px 0;
+                    margin-left: 5px;
+                    white-space: nowrap;
+                    a {
+                      text-decoration: none;
+                      color: #fff;
+                      font-size: 15px;
+                      &:hover {
+                        text-decoration: underline;
+                      }
+                    }
+                  }
+                }
+              }
+              &:hover {
+                display: block;
+              }
+            }
+          }
+        }
+      .header-form {
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        .header-form-search {
+          width: 100%;
+          padding: 5px 15px;
+          padding-right: 40px; /* space for the search icon */
+          border: 1px solid #14425d;
+          border-radius: 25px;
+          font-size: 16px;
+          transition: border-color 0.3s;
+          &:focus {
+            outline: none;
+            border-color: #14425d;
+          }
+        }
+        .header-form-search-btn {
+          position: absolute;
+          right: 10px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 18px;
+          color: #14425d;
+        }
+      }
+    }
+
+  .header-breadcrumb {
+    background: #ECECEC;
+    border-top: 1px solid #476171;
+    .header-breadcrumb-container {
+      height: 30px;
+      line-height: 30px;
+      color: #4E4E4E;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: 'Roboto Condensed',Tahoma,sans-serif;
+      padding: 0 200px; /* Add some padding */
+    }
+  }
+}
