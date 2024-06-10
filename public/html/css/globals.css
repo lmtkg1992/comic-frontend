@@ -4622,7 +4622,7 @@ input:-webkit-autofill:focus {
 }
 .header .container .header-nav ul li a .header-nav-item .chevron {
   top: 3px;
-  left: -10px;
+  left: -6px;
   color: #fff;
 }
 .header .container .header-nav ul li a .header-nav-item:hover {

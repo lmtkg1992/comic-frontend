@@ -8,4 +8,4 @@ export interface Story {
 // Define the Story type
 export interface StoryListProps {
     stories: Story[];
-};
+}
