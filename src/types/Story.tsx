@@ -2,6 +2,7 @@
 export interface Story {
     story_id: string;
     title: string;
+    path_image: string;
     description: string;
 }
 

@@ -44,7 +44,7 @@ const Header : React.FC<CategoryListProps> = ({ categories }) => {
                                         <ul className="">
                                             {goodList.map((category, index) => (
                                                 <li key={index}>
-                                                    <a href="#" title={category.name}>{category.name}</a>
+                                                    <a href="#" title={category.title}>{category.title}</a>
                                                 </li>
                                             ))}
                                         </ul>
@@ -66,7 +66,7 @@ const Header : React.FC<CategoryListProps> = ({ categories }) => {
                                             <ul>
                                                 {column.map((category, index) => (
                                                     <li key={index}>
-                                                        <a href="#" title={category.name}>{category.name}</a>
+                                                        <a href="#" title={category.title}>{category.title}</a>
                                                     </li>
                                                 ))}
                                             </ul>
