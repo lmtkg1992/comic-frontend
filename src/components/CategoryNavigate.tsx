@@ -1,5 +1,7 @@
 import { Category, CategoryListProps } from '../types/Category';
 
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 // Helper function to split the categories into columns
 const splitIntoColumns = (categories: Category[], itemsPerColumn: number) => {
     const columns = [];
@@ -28,7 +30,7 @@ const CategoryNavigate : React.FC<CategoryListProps> = ({ categories }) => {
     return (
         <header className="header">
             <div className="container">
-                <h1 className="logo"><a href="#"><span>YÊU TRUYỆN</span></a></h1>
+                <h1 className="logo"><a href={NEXT_PUBLIC_BASE_URL}><span>YÊU TRUYỆN</span></a></h1>
                 <nav className="header-nav">
                     <ul>
                         <li className="dropdown">
