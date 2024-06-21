@@ -1,45 +1,34 @@
-import Head from 'next/head';
-import { useState, useEffect } from 'react';
 import StoryList from '../components/StoryList';
-import Header from '../components/Header';
+import CategoryNavigate from '../components/CategoryNavigate';
 import { fetchStories, fetchCategories } from '../utils/api';
 
 import { Story } from '../types/Story';
 import { Category } from '../types/Category';
 interface Props {
-    stories: Story[];
     categories: Category[];
+    stories: Story[];
 }
 export async function getServerSideProps() {
 
-    const stories = await fetchStories();
     const categories = await fetchCategories();
+    const stories = await fetchStories();
 
     return {
         props: {
-            stories,
-            categories
+            categories,
+            stories
         },
     };
 }
 
-const HomePage: React.FC<Props> = ({stories, categories}) => {
+const HomePage: React.FC<Props> = ({categories, stories }) => {
     return (
-        // <StoryList stories={stories} />
         <body>
-        <Header categories={categories} />
+        <CategoryNavigate categories={categories} />
         <main className="main-body">
             <div className="container">
                 <div className="hot-story">
                     <div className="title-list">TRUYỆN HOT</div>
-                    <StoryList stories={stories} />
-                </div>
-                <div className="full-story">
-                    <div className="title-list">TRUYỆN HOÀN THÀNH</div>
-                    <StoryList stories={stories} />
-                </div>
-                <div className="full-story">
-                    <div className="title-list">TRUYỆN CẬP NHẬT HAY</div>
                     <StoryList stories={stories} />
                 </div>
             </div>

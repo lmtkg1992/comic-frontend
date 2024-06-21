@@ -10,7 +10,7 @@ const splitIntoColumns = (categories: Category[], itemsPerColumn: number) => {
 };
 
 // Create the Header component
-const Header : React.FC<CategoryListProps> = ({ categories }) => {
+const CategoryNavigate : React.FC<CategoryListProps> = ({ categories }) => {
 
     let normalCategories: Category[] = [];
     let goodList: Category[] = [];
@@ -92,4 +92,4 @@ const Header : React.FC<CategoryListProps> = ({ categories }) => {
     );
 };
 
-export default Header;
+export default CategoryNavigate;
