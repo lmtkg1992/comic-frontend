@@ -28,24 +28,66 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story, categories, chapters }
     return (
         <div>
             <CategoryNavigate categories={categories} />
-            <main>
-                <div className="story-detail">
-                    <img src={path_image} alt={title} />
-                    <h1>{title}</h1>
-                    <p>Author: {author}</p>
-                    <p>Publish Date: {publish_date}</p>
-                    <p>Status: {status}</p>
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
-                </div>
-                <div className="chapter-list">
-                    <h2>Chapters</h2>
-                    <ul>
-                        {chapters.map((chapter) => (
-                            <li key={chapter.chapter_id}>
-                                <a href={`/chapters/${story.url_key}-${chapter.url_key}.${chapter.chapter_id}`}>{chapter.title}</a>
-                            </li>
-                        ))}
-                    </ul>
+            <main className="main-body">
+                <div className="container">
+                    <div className="story-detail">
+                        <div className="left-column">
+                            <div className="story-info">
+                                <h2>THÔNG TIN TRUYỆN</h2>
+                                <div className="story-header">
+                                    <div className="story-image">
+                                            <img src={path_image} alt={title} />
+                                            <p>Author: {author}</p>
+                                            <p>Status: {status}</p>
+                                    </div>
+                                    <div className="story-content">
+                                        <h1 className="story-name">{title}</h1>
+                                        <div className="story-description" dangerouslySetInnerHTML={{ __html: description }} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="chapter-list">
+                                <h2>DANH SÁCH CHƯƠNG</h2>
+                                <ul>
+                                    {chapters.map((chapter) => (
+                                        <li key={chapter.chapter_id}>
+                                            <a href={`/chapters/${story.url_key}-${chapter.url_key}.${chapter.chapter_id}`}>{chapter.title}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="right-column">
+                            <div className="top-story">
+                                <h2>TRUYỆN ĐANG HOT</h2>
+                                <div className="top-story-filter">
+                                    <div className="active">Ngày</div>
+                                    <div>Tháng</div>
+                                    <div>All time</div>
+                                </div>
+                                <div className="top-story-item">
+                                    <div>
+                                        <div className="top-story-num">1</div>
+                                        <div className="top-story-num-title">
+                                            <h3>
+                                                <a href="https://truyenfull.vn/than-dao-dan-ton-6060282/" title="Thần Đạo Đan Tôn">Thần Đạo Đan Tôn</a>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="top-story-item">
+                                    <div>
+                                        <div className="top-story-num">2</div>
+                                        <div className="top-story-num-title">
+                                            <h3>
+                                                <a href="https://truyenfull.vn/than-dao-dan-ton-6060282/" title="Thần Đạo Đan Tôn">Thần Đạo Đan Tôn</a>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

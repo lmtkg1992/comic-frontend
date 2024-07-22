@@ -4754,28 +4754,190 @@ input:-webkit-autofill:focus {
   font-weight: 700;
   margin-top: 10px;
 }
-.main-body .container .full-story .title-list {
+.main-body .container .story-detail {
+  display: flex;
+  width: 100%;
+}
+.main-body .container .story-detail .left-column {
+  flex: 3;
+}
+.main-body .container .story-detail .left-column .story-info h2 {
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(20, 66, 93, 0.5);
+  padding-bottom: 10px;
+}
+.main-body .container .story-detail .left-column .story-info .story-header {
+  display: flex;
+  justify-content: center;
+  /* Center the content horizontally */
+}
+.main-body .container .story-detail .left-column .story-info .story-header .story-image {
+  max-width: 40%;
+  /* Increased width for the image */
+  max-height: 300px;
+  height: auto;
+  margin-right: 20px;
+}
+.main-body .container .story-detail .left-column .story-info .story-header .story-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  /* Ensure image does not inherit text alignment */
+  margin: 0 auto;
+  /* Center the image itself */
+}
+.main-body .container .story-detail .left-column .story-info .story-header .story-image p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 5px 0;
+  /* Add some margin to the text */
+  text-align: left;
+  /* Ensure text is left-aligned */
+}
+.main-body .container .story-detail .left-column .story-info .story-header .story-content {
+  flex: 1;
+  max-width: 75%;
+  /* Adjusted width to balance with the image */
+}
+.main-body .container .story-detail .left-column .story-info .story-header .story-content .story-name {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(166, 177, 180, 0.5);
+  padding-bottom: 10px;
+}
+.main-body .container .story-detail .left-column .story-info .story-header .story-content .story-description p {
+  margin: 10px 0;
+}
+.main-body .container .story-detail .left-column .story-info p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.main-body .container .story-detail .left-column .chapter-list h2 {
+  font-size: 21px;
+  font-weight: 700;
+  margin-top: 90px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(20, 66, 93, 0.5);
+  padding-bottom: 10px;
+}
+.main-body .container .story-detail .left-column .chapter-list ul {
+  list-style: none;
+  padding: 0;
+}
+.main-body .container .story-detail .left-column .chapter-list ul li {
+  margin-bottom: 10px;
+}
+.main-body .container .story-detail .left-column .chapter-list ul li a {
+  text-decoration: none;
+  color: #14425d;
+  font-size: 16px;
+}
+.main-body .container .story-detail .left-column .chapter-list ul li a:hover {
+  text-decoration: underline;
+}
+.main-body .container .story-detail .right-column {
+  flex: 1;
+  margin-left: 20px;
+}
+.main-body .container .story-detail .right-column .top-story h2 {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
 }
-.main-body .container .full-story .item-list {
+.main-body .container .story-detail .right-column .top-story .top-story-filter {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.main-body .container .full-story .item-list .item-story {
-  width: 10%;
   margin-bottom: 20px;
-  margin-left: 30px;
 }
-.main-body .container .full-story .item-list .item-story .item-image img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
+.main-body .container .story-detail .right-column .top-story .top-story-filter div {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #14425d;
+  margin-right: 5px;
 }
-.main-body .container .full-story .item-list .item-story .item-title {
-  font-size: 16px;
+.main-body .container .story-detail .right-column .top-story .top-story-filter div.active {
+  background-color: #14425d;
+  color: #fff;
+}
+.main-body .container .story-detail .right-column .top-story .top-story-item {
+  margin-bottom: 20px;
+}
+.main-body .container .story-detail .right-column .top-story .top-story-item div {
+  display: flex;
+  align-items: center;
+}
+.main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num {
+  font-size: 24px;
   font-weight: 700;
-  margin-top: 10px;
+  margin-right: 10px;
+}
+.main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num-title h3 {
+  font-size: 18px;
+}
+.main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num-title h3 a {
+  text-decoration: none;
+  color: #14425d;
+}
+.main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num-title h3 a:hover {
+  text-decoration: underline;
+}
+.main-body .container .chapter-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.main-body .container .chapter-header .story-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+.main-body .container .chapter-header .chapter-title {
+  font-size: 22px;
+  color: #757575;
+  margin-bottom: 20px;
+}
+.main-body .container .chapter-header .chapter-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.main-body .container .chapter-header .chapter-navigation .chapter-nav-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.main-body .container .chapter-header .chapter-navigation .chapter-nav-btn:hover {
+  background-color: #45a049;
+}
+.main-body .container .chapter-header .chapter-navigation .chapter-select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 0 10px;
+}
+.main-body .container .chapter-header .chapter-decorations {
+  display: flex;
+  justify-content: center;
+}
+.main-body .container .chapter-header .chapter-decorations span {
+  font-size: 24px;
+  color: #757575;
+  margin: 0 10px;
+}
+.main-body .container .chapter-content {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 auto;
+}
+.main-body .container .chapter-content p {
+  margin-bottom: 15px;
 }
