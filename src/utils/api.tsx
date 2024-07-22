@@ -25,8 +25,8 @@ export const fetchChapters = async (storyId: string, page = 1, size = 10) => {
     return data.data.list;
 };
 
-export const fetchChapterDetail = async (chapterId: string) => {
-    const response = await fetch(`${API_BASE_URL}/chapters/detail/${chapterId}`);
+export const fetchChapterDetail = async (storyId: string, ordered: string) => {
+    const response = await fetch(`${API_BASE_URL}/chapters/detail/${storyId}/${ordered}`);
     const data = await response.json();
     return data;
 };

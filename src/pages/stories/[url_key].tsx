@@ -51,7 +51,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story, categories, chapters }
                                 <ul>
                                     {chapters.map((chapter) => (
                                         <li key={chapter.chapter_id}>
-                                            <a href={`/chapters/${story.url_key}-${chapter.url_key}.${chapter.chapter_id}`}>{chapter.title}</a>
+                                            <a href={`/chapters/${story.url_key}.${story.story_id}/chuong-${chapter.ordered}`}>{chapter.title}</a>
                                         </li>
                                     ))}
                                 </ul>
