@@ -4774,27 +4774,33 @@ input:-webkit-autofill:focus {
   /* Center the content horizontally */
 }
 .main-body .container .story-detail .left-column .story-info .story-header .story-image {
-  max-width: 40%;
+  max-width: 20%;
   /* Increased width for the image */
   max-height: 300px;
   height: auto;
   margin-right: 20px;
 }
 .main-body .container .story-detail .left-column .story-info .story-header .story-image img {
-  max-width: 100%;
+  max-width: 200px;
   height: auto;
   display: block;
   /* Ensure image does not inherit text alignment */
   margin: 0 auto;
   /* Center the image itself */
 }
-.main-body .container .story-detail .left-column .story-info .story-header .story-image p {
+.main-body .container .story-detail .left-column .story-info .story-header .story-image .story-info {
   font-size: 16px;
   line-height: 1.5;
-  margin: 5px 0;
+  margin: 5px 0 5px 10px;
   /* Add some margin to the text */
   text-align: left;
   /* Ensure text is left-aligned */
+}
+.main-body .container .story-detail .left-column .story-info .story-header .story-image .story-info p {
+  word-wrap: break-word;
+  /* Ensures long words wrap to the next line */
+  margin: 5px 0;
+  /* Add some margin to each paragraph */
 }
 .main-body .container .story-detail .left-column .story-info .story-header .story-content {
   flex: 1;
@@ -4816,28 +4822,63 @@ input:-webkit-autofill:focus {
   font-size: 16px;
   line-height: 1.5;
 }
+.main-body .container .story-detail .left-column .chapter-list {
+  margin-top: 200px;
+  margin-bottom: 20px;
+}
 .main-body .container .story-detail .left-column .chapter-list h2 {
   font-size: 21px;
   font-weight: 700;
-  margin-top: 90px;
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba(20, 66, 93, 0.5);
   padding-bottom: 10px;
+  border-bottom: 1px solid rgba(20, 66, 93, 0.5);
 }
-.main-body .container .story-detail .left-column .chapter-list ul {
+.main-body .container .story-detail .left-column .chapter-list .chapter-columns {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.main-body .container .story-detail .left-column .chapter-list .chapter-columns .chapter-column {
+  width: 48%;
   list-style: none;
   padding: 0;
 }
-.main-body .container .story-detail .left-column .chapter-list ul li {
+.main-body .container .story-detail .left-column .chapter-list .chapter-columns .chapter-column li {
   margin-bottom: 10px;
 }
-.main-body .container .story-detail .left-column .chapter-list ul li a {
+.main-body .container .story-detail .left-column .chapter-list .chapter-columns .chapter-column li a {
   text-decoration: none;
-  color: #14425d;
-  font-size: 16px;
+  color: #333;
 }
-.main-body .container .story-detail .left-column .chapter-list ul li a:hover {
+.main-body .container .story-detail .left-column .chapter-list .chapter-columns .chapter-column li a:hover {
   text-decoration: underline;
+}
+.main-body .container .story-detail .left-column .chapter-list .pagination {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 15%;
+  width: 100%;
+  text-align: center;
+}
+.main-body .container .story-detail .left-column .chapter-list .pagination a {
+  margin: 0 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  color: #333;
+  border-radius: 5px;
+}
+.main-body .container .story-detail .left-column .chapter-list .pagination a.active {
+  font-weight: bold;
+  background-color: #14425d;
+  color: #fff;
+}
+.main-body .container .story-detail .left-column .chapter-list .pagination a:hover {
+  background-color: #f0f0f0;
+}
+.main-body .container .story-detail .left-column .chapter-list .pagination a:first-child,
+.main-body .container .story-detail .left-column .chapter-list .pagination a:last-child {
+  font-weight: bold;
 }
 .main-body .container .story-detail .right-column {
   flex: 1;
@@ -4916,6 +4957,10 @@ input:-webkit-autofill:focus {
 }
 .main-body .container .chapter-header .chapter-navigation .chapter-nav-btn:hover {
   background-color: #45a049;
+}
+.main-body .container .chapter-header .chapter-navigation .chapter-nav-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 .main-body .container .chapter-header .chapter-navigation .chapter-select {
   padding: 10px;
