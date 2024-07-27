@@ -87,6 +87,12 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story, categories, chapters, 
         return pages;
     };
 
+    const getStatusLabel = (status: string) => {
+        if (status === 'completed') return 'Hoàn thành';
+        if (status === 'inprogress') return 'Đang tiến hành';
+        return status;
+    };
+
     return (
         <div>
             <CategoryNavigate categories={categories} />
@@ -101,9 +107,8 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story, categories, chapters, 
                                         <img src={path_image} alt={title} />
                                         <div className="story-info">
                                             <p>Tác giả: <a href={`/authors/${author.url_key}.${author.author_id}`}>{author.author_title}</a></p>
-                                            <p>Trạng thái: {status}</p>
-                                            <p>Thể loại:
-                                                {storyCategories.map((category, index) => (
+                                            <p>Trạng thái: {getStatusLabel(status)}</p>
+                                            <p>Thể loại: {storyCategories.map((category, index) => (
                                                     <span key={category.category_id}>
                                                         {index > 0 && ', '}
                                                         <a href={`/categories/${category.url_key}.${category.category_id}`}>{category.category_name}</a>
