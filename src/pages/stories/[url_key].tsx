@@ -1,7 +1,7 @@
 // src/pages/stories/[url_key].tsx
 import { GetServerSideProps } from 'next';
 import { useState } from 'react';
-import { fetchStoryDetail, fetchCategories, fetchChapters } from '../../utils/api';
+import { fetchStoryDetailByUrlKey, fetchCategories, fetchChapters } from '../../utils/api';
 import { Story, Chapter } from '../../types/Chapter';
 import { Category } from '../../types/Category';
 import CategoryNavigate from '../../components/CategoryNavigate';
@@ -43,7 +43,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story, categories, chapters, 
                 <ul className="chapter-column" key={i}>
                     {chapters.slice(i * itemsPerColumn, (i + 1) * itemsPerColumn).map((chapter) => (
                         <li key={chapter.chapter_id}>
-                            <a href={`/chapters/${story.url_key}.${story.story_id}/chuong-${chapter.ordered}`}>{chapter.title}</a>
+                            <a href={`/chapters/${story.url_key}/${chapter.url_key}`}>{chapter.title}</a>
                         </li>
                     ))}
                 </ul>
@@ -106,14 +106,14 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story, categories, chapters, 
                                     <div className="story-image">
                                         <img src={path_image} alt={title} />
                                         <div className="story-info">
-                                            <p>Tác giả: <a href={`/authors/${author.url_key}.${author.author_id}`}>{author.author_title}</a></p>
+                                            <p>Tác giả: <a href={`/authors/${author.url_key}`}>{author.author_title}</a></p>
                                             <p>Trạng thái: {getStatusLabel(status)}</p>
                                             <p>Thể loại: {storyCategories.map((category, index) => (
-                                                    <span key={category.category_id}>
-                                                        {index > 0 && ', '}
-                                                        <a href={`/categories/${category.url_key}.${category.category_id}`}>{category.category_name}</a>
-                                                    </span>
-                                                ))}
+                                                <span key={category.category_id}>
+                                                    {index > 0 && ', '}
+                                                    <a href={`/categories/${category.url_key}`}>{category.category_name}</a>
+                                                </span>
+                                            ))}
                                             </p>
                                             <p>Nguồn: {source}</p>
                                             <p>Dịch giả: {translator}</p>
@@ -189,9 +189,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     const urlKey = Array.isArray(url_key) ? url_key[0] : url_key;
-    const storyId = urlKey.split('.')[1];
 
-    if (!storyId) {
+    const story = await fetchStoryDetailByUrlKey(urlKey);
+    if (!story || !story.story_id) {
         return {
             props: {
                 story: null,
@@ -203,8 +203,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         };
     }
 
-    const story = await fetchStoryDetail(storyId);
-    const { list: chapters, total, total_page: totalPages } = await fetchChapters(storyId);
+    const { list: chapters, total, total_page: totalPages } = await fetchChapters(story.story_id);
 
     return {
         props: {

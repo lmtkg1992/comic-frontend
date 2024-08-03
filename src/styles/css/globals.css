@@ -4789,7 +4789,6 @@ input:-webkit-autofill:focus {
   /* Center the image itself */
 }
 .main-body .container .story-detail .left-column .story-info .story-header .story-image .story-info {
-  font-size: 16px;
   line-height: 1.5;
   margin: 5px 0 5px 10px;
   /* Add some margin to the text */
@@ -4797,6 +4796,8 @@ input:-webkit-autofill:focus {
   /* Ensure text is left-aligned */
 }
 .main-body .container .story-detail .left-column .story-info .story-header .story-image .story-info p {
+  font-size: 14px;
+  /* Decreased font size */
   word-wrap: break-word;
   /* Ensures long words wrap to the next line */
   margin: 5px 0;
@@ -4872,9 +4873,6 @@ input:-webkit-autofill:focus {
   font-weight: bold;
   background-color: #14425d;
   color: #fff;
-}
-.main-body .container .story-detail .left-column .chapter-list .pagination a:hover {
-  background-color: #f0f0f0;
 }
 .main-body .container .story-detail .left-column .chapter-list .pagination a:first-child,
 .main-body .container .story-detail .left-column .chapter-list .pagination a:last-child {

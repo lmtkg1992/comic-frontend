@@ -6,6 +6,7 @@ export interface Chapter {
     url_key: string;
     content: string;
     ordered: number;
+    short_title: string;
 }
 
 export interface Story {

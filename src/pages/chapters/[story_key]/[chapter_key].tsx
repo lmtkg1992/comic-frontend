@@ -1,6 +1,6 @@
 // src/pages/chapters/[story_key]/[chapter_key].tsx
 import { GetServerSideProps } from 'next';
-import { fetchChapterDetail, fetchStoryDetail, fetchCategories } from '../../../utils/api';
+import { fetchChapterDetailByUrl, fetchStoryDetailByUrlKey, fetchCategories, fetchChapters } from '../../../utils/api';
 import { Chapter, Story } from '../../../types/Chapter';
 import CategoryNavigate from '../../../components/CategoryNavigate';
 import { Category } from '../../../types/Category';
@@ -9,9 +9,10 @@ interface ChapterDetailProps {
     chapter: Chapter | null;
     categories: Category[];
     story: Story | null;
+    chapters: Chapter[];
 }
 
-const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, story }) => {
+const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, story, chapters }) => {
     if (!chapter || !story) {
         return (
             <main>
@@ -20,7 +21,7 @@ const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, stor
         );
     }
 
-    const { title, content, ordered } = chapter;
+    const { title, content, ordered, short_title } = chapter;
 
     return (
         <div>
@@ -29,7 +30,7 @@ const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, stor
                 <div className="container">
                     <div className="chapter-header">
                         <h1 className="story-title">
-                            <a href={`/stories/${story.url_key}.${story.story_id}`}>{story.title}</a>
+                            <a href={`/stories/${story.url_key}`}>{story.title}</a>
                         </h1>
                         <h2 className="chapter-title">{title}</h2>
                         <div className="chapter-navigation">
@@ -37,7 +38,7 @@ const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, stor
                                 className="chapter-nav-btn"
                                 disabled={ordered <= 1}
                                 onClick={() =>
-                                    window.location.href = `/chapters/${story.url_key}.${story.story_id}/chuong-${ordered - 1}`
+                                    window.location.href = `/chapters/${story.url_key}/${chapters[ordered - 2].url_key}`
                                 }
                             >
                                 Chương trước
@@ -46,12 +47,12 @@ const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, stor
                                 className="chapter-select"
                                 value={ordered}
                                 onChange={(e) =>
-                                    window.location.href = `/chapters/${story.url_key}.${story.story_id}/chuong-${e.target.value}`
+                                    window.location.href = `/chapters/${story.url_key}/${chapters[parseInt(e.target.value) - 1].url_key}`
                                 }
                             >
-                                {[...Array(story.total_chapters)].map((_, i) => (
-                                    <option key={i + 1} value={i + 1}>
-                                        Chương {i + 1}
+                                {chapters.map((chapter, index) => (
+                                    <option key={index + 1} value={index + 1}>
+                                        {chapter.short_title}
                                     </option>
                                 ))}
                             </select>
@@ -59,7 +60,7 @@ const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, stor
                                 className="chapter-nav-btn"
                                 disabled={ordered >= story.total_chapters}
                                 onClick={() =>
-                                    window.location.href = `/chapters/${story.url_key}.${story.story_id}/chuong-${ordered + 1}`
+                                    window.location.href = `/chapters/${story.url_key}/${chapters[ordered].url_key}`
                                 }
                             >
                                 Chương tiếp
@@ -87,6 +88,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 chapter: null,
                 categories,
                 story: null,
+                chapters: [],
             },
         };
     }
@@ -94,27 +96,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const storyKey = Array.isArray(story_key) ? story_key[0] : story_key;
     const chapterKey = Array.isArray(chapter_key) ? chapter_key[0] : chapter_key;
 
-    const storyId = storyKey.split('.')[1];
-    const ordered = chapterKey.replace('chuong-', '');
-
-    if (!storyId || !ordered) {
-        return {
-            props: {
-                chapter: null,
-                categories,
-                story: null,
-            },
-        };
-    }
-
-    const chapter = await fetchChapterDetail(storyId, ordered);
-    const story = await fetchStoryDetail(storyId);
+    const story = await fetchStoryDetailByUrlKey(storyKey);
+    const chapter = await fetchChapterDetailByUrl(storyKey, chapterKey);
+    const { list: chapters } = await fetchChapters(story.story_id,1,story.total_chapters);
 
     return {
         props: {
             chapter,
             categories,
             story,
+            chapters,
         },
     };
 };
