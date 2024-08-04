@@ -1,3 +1,4 @@
+// src/components/StoryList.tsx
 import { Story } from '../types/Chapter';
 
 interface StoryListProps {
@@ -24,9 +25,11 @@ const StoryList: React.FC<StoryListProps> = ({ stories }) => {
                             <a href={`/authors/${story.author.url_key}`}>{story.author.author_title}</a>
                         </p>
                     </div>
-                    <div className="story-chapters">
-                        <a href={`/chapters/${story.url_key}/1`}>Chương 1</a>
-                    </div>
+                    {story.last_chapter && (
+                        <div className="story-chapters">
+                            <a href={`/chapters/${story.url_key}/${story.last_chapter.url_key}`}>{story.last_chapter.title}</a>
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

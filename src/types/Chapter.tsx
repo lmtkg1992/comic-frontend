@@ -35,4 +35,8 @@ export interface Story {
         category_name: string;
         url_key: string;
     }[];
+    last_chapter: {
+        url_key: string;
+        title: string;
+    } | null;
 }
