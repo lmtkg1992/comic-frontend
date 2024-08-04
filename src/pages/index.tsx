@@ -4,6 +4,7 @@ import { fetchStories, fetchCategories } from '../utils/api';
 
 import { Story } from '../types/Story';
 import { Category } from '../types/Category';
+import HomePageStoryList from "@/src/components/HomePageStoryList";
 interface Props {
     categories: Category[];
     stories: Story[];
@@ -29,7 +30,7 @@ const HomePage: React.FC<Props> = ({categories, stories }) => {
             <div className="container">
                 <div className="hot-story">
                     <div className="title-list">TRUYỆN HOT</div>
-                    <StoryList stories={stories} />
+                    <HomePageStoryList stories={stories} />
                 </div>
             </div>
         </main>

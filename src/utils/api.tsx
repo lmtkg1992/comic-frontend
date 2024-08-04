@@ -13,10 +13,22 @@ export const fetchCategories = async () => {
     return data.data.list;
 };
 
-export const fetchStoryDetail = async (storyId: string) => {
-    const response = await fetch(`${API_BASE_URL}/stories/detail/${storyId}`);
+export const fetchCategoryDetailByUrlKey = async (urlKey: string) => {
+    const response = await fetch(`${API_BASE_URL}/categories/detail_by_url_key/${urlKey}`);
     const data = await response.json();
     return data;
+};
+
+export const fetchCategoriesByType = async (typeCategory: string) => {
+    const response = await fetch(`${API_BASE_URL}/categories/list?type_category=${typeCategory}`);
+    const data = await response.json();
+    return data.data.list;
+};
+
+export const fetchStoriesByCategory = async (categoryId: string, page = 1, size = 10) => {
+    const response = await fetch(`${API_BASE_URL}/stories/list_by_category/${categoryId}?page=${page}&size=${size}`);
+    const data = await response.json();
+    return data.data;
 };
 
 export const fetchStoryDetailByUrlKey = async (urlKey: string) => {
