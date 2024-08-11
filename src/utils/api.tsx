@@ -60,3 +60,9 @@ export const fetchStoriesByAuthor = async (authorId: string, page = 1, size = 10
     const data = await response.json();
     return data.data;
 };
+
+export const fetchStoriesByTitle = async (title: string, page = 1, size = 10) => {
+    const response = await fetch(`${API_BASE_URL}/stories/list?title=${title}&page=${page}&size=${size}`);
+    const data = await response.json();
+    return data.data;
+};

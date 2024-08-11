@@ -1,4 +1,6 @@
 import { Category, CategoryListProps } from '../types/Category';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -12,7 +14,9 @@ const splitIntoColumns = (categories: Category[], itemsPerColumn: number) => {
 };
 
 // Create the Header component
-const CategoryNavigate : React.FC<CategoryListProps> = ({ categories }) => {
+const CategoryNavigate: React.FC<CategoryListProps> = ({ categories }) => {
+    const router = useRouter();
+    const [searchKeyword, setSearchKeyword] = useState('');
 
     let normalCategories: Category[] = [];
     let goodList: Category[] = [];
@@ -26,6 +30,19 @@ const CategoryNavigate : React.FC<CategoryListProps> = ({ categories }) => {
     });
 
     const columnNormalCategories = splitIntoColumns(normalCategories, 13);
+
+    const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (searchKeyword) {
+            router.push(`/search/${encodeURIComponent(searchKeyword)}`);
+        }
+    };
+
+    useEffect(() => {
+        if (router.query.key_word) {
+            setSearchKeyword(decodeURIComponent(router.query.key_word as string));
+        }
+    }, [router.query.key_word]);
 
     return (
         <header className="header">
@@ -46,7 +63,7 @@ const CategoryNavigate : React.FC<CategoryListProps> = ({ categories }) => {
                                         <ul className="">
                                             {goodList.map((category, index) => (
                                                 <li key={index}>
-                                                    <a href="#" title={category.title}>{category.title}</a>
+                                                    <a href={`/categories/${category.url_key}`} title={category.title}>{category.title}</a>
                                                 </li>
                                             ))}
                                         </ul>
@@ -68,7 +85,7 @@ const CategoryNavigate : React.FC<CategoryListProps> = ({ categories }) => {
                                             <ul>
                                                 {column.map((category, index) => (
                                                     <li key={index}>
-                                                        <a href="#" title={category.title}>{category.title}</a>
+                                                        <a href={`/categories/${category.url_key}`} title={category.title}>{category.title}</a>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -80,9 +97,17 @@ const CategoryNavigate : React.FC<CategoryListProps> = ({ categories }) => {
                     </ul>
                 </nav>
 
-                <form className="header-form">
-                    <input className="header-form-search" id="search-input" type="search" name="keyword" placeholder="Tìm kiếm..."/>
-                    <button className="header-form-search-btn" type="submit" ><span className="glyphicon glyphicon-search"></span></button>
+                <form className="header-form" onSubmit={handleSearch}>
+                    <input
+                        className="header-form-search"
+                        id="search-input"
+                        type="search"
+                        name="keyword"
+                        placeholder="Tìm kiếm..."
+                        value={searchKeyword}
+                        onChange={(e) => setSearchKeyword(e.target.value)}
+                    />
+                    <button className="header-form-search-btn" type="submit"><span className="glyphicon glyphicon-search"></span></button>
                 </form>
             </div>
             <div className="header-breadcrumb">
