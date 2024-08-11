@@ -5,17 +5,17 @@ import { Story } from '../../types/Chapter';
 import { Category } from '../../types/Category';
 import CategoryNavigate from '../../components/CategoryNavigate';
 import StoryList from '../../components/StoryList';
-import CategorySideBar from "@/src/components/CategorySideBar";
+import CategorySideBar from '../../components/CategorySideBar';
+import { STORIES_PER_PAGE } from '../../utils/config';
 
 interface AuthorDetailProps {
     author: any | null;
-    stories: Story[];
+    initialStories: Story[];
     categories: Category[];
-    totalPages: number;
-    currentPage: number;
+    initialTotalPages: number;
 }
 
-const AuthorDetail: React.FC<AuthorDetailProps> = ({ author, stories, categories, totalPages, currentPage }) => {
+const AuthorDetail: React.FC<AuthorDetailProps> = ({ author, initialStories, categories, initialTotalPages }) => {
     if (!author) {
         return (
             <main>
@@ -24,11 +24,7 @@ const AuthorDetail: React.FC<AuthorDetailProps> = ({ author, stories, categories
         );
     }
 
-    const handlePageChange = async (page: number) => {
-        // Implement the page change logic here if needed
-    };
-
-    const authorDescription = author.description ? author.description : `Danh sách truyện của tác giả ${author.title}`;
+    const fetchStories = (page: number) => fetchStoriesByAuthor(author.author_id, page, STORIES_PER_PAGE);
 
     return (
         <div>
@@ -38,11 +34,15 @@ const AuthorDetail: React.FC<AuthorDetailProps> = ({ author, stories, categories
                     <div className="category-detail">
                         <div className="left-column">
                             <h2>{author.title}</h2>
-                            <StoryList stories={stories} />
+                            <StoryList
+                                fetchMethod={fetchStories}
+                                initialStories={initialStories}
+                                initialTotalPages={initialTotalPages}
+                            />
                         </div>
                         <div className="right-column">
                             <div className="category-info">
-                                {authorDescription}
+                                {`Danh sách truyện của tác giả ${author.title}`}
                             </div>
                             <CategorySideBar typeCategory="category" />
                         </div>
@@ -59,37 +59,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return {
             props: {
                 author: null,
-                stories: [],
+                initialStories: [],
                 categories: [],
-                totalPages: 0,
-                currentPage: 1,
+                initialTotalPages: 0,
             },
         };
     }
 
     const author = await fetchAuthorDetailByUrlKey(author_key as string);
-    if (!author) {
-        return {
-            props: {
-                author: null,
-                stories: [],
-                categories: [],
-                totalPages: 0,
-                currentPage: 1,
-            },
-        };
-    }
-
     const categories = await fetchCategories();
-    const { list: stories, total_page: totalPages } = await fetchStoriesByAuthor(author.author_id, 1, 10);
+    const { list: initialStories, total_page: initialTotalPages } = await fetchStoriesByAuthor(author.author_id, 1, STORIES_PER_PAGE);
 
     return {
         props: {
             author,
-            stories,
+            initialStories,
             categories,
-            totalPages,
-            currentPage: 1,
+            initialTotalPages,
         },
     };
 };

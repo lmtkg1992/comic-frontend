@@ -1,3 +1,4 @@
+// src/pages/categories/[category_key].tsx
 import { GetServerSideProps } from 'next';
 import { fetchCategoryDetailByUrlKey, fetchStoriesByCategory, fetchCategories } from '../../utils/api';
 import { Story } from '../../types/Chapter';
@@ -5,16 +6,16 @@ import { Category } from '../../types/Category';
 import CategoryNavigate from '../../components/CategoryNavigate';
 import StoryList from '../../components/StoryList';
 import CategorySideBar from '../../components/CategorySideBar';
+import { STORIES_PER_PAGE } from '../../utils/config';
 
 interface CategoryDetailProps {
     category: Category | null;
-    stories: Story[];
+    initialStories: Story[];
     categories: Category[];
-    totalPages: number;
-    currentPage: number;
+    initialTotalPages: number;
 }
 
-const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, stories, categories, totalPages, currentPage }) => {
+const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, initialStories, categories, initialTotalPages }) => {
     if (!category) {
         return (
             <main>
@@ -23,10 +24,7 @@ const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, stories, cate
         );
     }
 
-    const handlePageChange = async (page: number) => {
-        // Implement the page change logic here if needed
-    };
-    const categoryDescription = category.description ? category.description : `Danh sách truyện của danh mục ${category.title}`;
+    const fetchStories = (page: number) => fetchStoriesByCategory(category.category_id, page, STORIES_PER_PAGE);
 
     return (
         <div>
@@ -36,11 +34,15 @@ const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, stories, cate
                     <div className="category-detail">
                         <div className="left-column">
                             <h2>{category.title}</h2>
-                            <StoryList stories={stories} />
+                            <StoryList
+                                fetchMethod={fetchStories}
+                                initialStories={initialStories}
+                                initialTotalPages={initialTotalPages}
+                            />
                         </div>
                         <div className="right-column">
                             <div className="category-info">
-                                {categoryDescription}
+                                {category.description || `Danh sách truyện của danh mục ${category.title}`}
                             </div>
                             <CategorySideBar typeCategory="category" />
                         </div>
@@ -57,10 +59,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return {
             props: {
                 category: null,
-                stories: [],
+                initialStories: [],
                 categories: [],
-                totalPages: 0,
-                currentPage: 1,
+                initialTotalPages: 0,
             },
         };
     }
@@ -70,24 +71,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return {
             props: {
                 category: null,
-                stories: [],
+                initialStories: [],
                 categories: [],
-                totalPages: 0,
-                currentPage: 1,
+                initialTotalPages: 0,
             },
         };
     }
 
     const categories = await fetchCategories();
-    const { list: stories, total_page: totalPages } = await fetchStoriesByCategory(category.category_id, 1, 10);
+    const { list: initialStories, total_page: initialTotalPages } = await fetchStoriesByCategory(category.category_id, 1, STORIES_PER_PAGE);
 
     return {
         props: {
             category,
-            stories,
+            initialStories,
             categories,
-            totalPages,
-            currentPage: 1,
+            initialTotalPages,
         },
     };
 };

@@ -6,29 +6,17 @@ import { Category } from '../../types/Category';
 import CategoryNavigate from '../../components/CategoryNavigate';
 import StoryList from '../../components/StoryList';
 import CategorySideBar from '../../components/CategorySideBar';
+import { STORIES_PER_PAGE } from '../../utils/config';
 
 interface SearchResultsProps {
     key_word: string;
-    stories: Story[];
+    initialStories: Story[];
     categories: Category[];
-    totalPages: number;
-    currentPage: number;
+    initialTotalPages: number;
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ key_word, stories, categories, totalPages, currentPage }) => {
-    if (!stories || stories.length === 0) {
-        return (
-            <main>
-                <p>No results found for "{key_word}".</p>
-            </main>
-        );
-    }
-
-    const handlePageChange = async (page: number) => {
-        // Implement the page change logic here if needed
-    };
-
-    const categoryDescription = `Danh sách truyện phù hợp với từ khóa ${key_word}`;
+const SearchResults: React.FC<SearchResultsProps> = ({ key_word, initialStories, categories, initialTotalPages }) => {
+    const fetchStories = (page: number) => fetchStoriesByTitle(key_word, page, STORIES_PER_PAGE);
 
     return (
         <div>
@@ -38,11 +26,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({ key_word, stories, catego
                     <div className="category-detail">
                         <div className="left-column">
                             <h2>KẾT QUẢ TÌM KIẾM CHO TỪ KHÓA: {key_word}</h2>
-                            <StoryList stories={stories} />
+                            <StoryList
+                                fetchMethod={fetchStories}
+                                initialStories={initialStories}
+                                initialTotalPages={initialTotalPages}
+                            />
                         </div>
                         <div className="right-column">
                             <div className="category-info">
-                                {categoryDescription}
+                                {`Danh sách truyện phù hợp với từ khóa ${key_word}`}
                             </div>
                             <CategorySideBar typeCategory="category" />
                         </div>
@@ -59,24 +51,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return {
             props: {
                 key_word: '',
-                stories: [],
+                initialStories: [],
                 categories: [],
-                totalPages: 0,
-                currentPage: 1,
+                initialTotalPages: 0,
             },
         };
     }
 
     const categories = await fetchCategories();
-    const { list: stories, total_page: totalPages } = await fetchStoriesByTitle(key_word as string, 1, 10);
+    const { list: initialStories, total_page: initialTotalPages } = await fetchStoriesByTitle(key_word as string, 1, STORIES_PER_PAGE);
 
     return {
         props: {
             key_word,
-            stories,
+            initialStories,
             categories,
-            totalPages,
-            currentPage: 1,
+            initialTotalPages,
         },
     };
 };

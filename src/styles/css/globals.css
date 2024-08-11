@@ -5050,6 +5050,30 @@ input:-webkit-autofill:focus {
   color: #1e88e5;
   text-decoration: none;
 }
+.main-body .container .category-detail .left-column .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.main-body .container .category-detail .left-column .pagination button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.main-body .container .category-detail .left-column .pagination button:hover {
+  background-color: #f0f0f0;
+}
+.main-body .container .category-detail .left-column .pagination button.active {
+  background-color: #1e88e5;
+  color: #fff;
+  font-weight: bold;
+  border-color: #1e88e5;
+}
 .main-body .container .category-detail .right-column {
   flex: 1;
   margin-left: 20px;
