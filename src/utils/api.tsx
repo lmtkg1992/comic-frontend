@@ -66,3 +66,22 @@ export const fetchStoriesByTitle = async (title: string, page = 1, size = 10) =>
     const data = await response.json();
     return data.data;
 };
+
+// src/utils/api.tsx
+export const fetchHotStories = async (size: number) => {
+    const response = await fetch(`${API_BASE_URL}/top_stories/list_by_period/all?size=${size}`);
+    const data = await response.json();
+    return data.data;
+};
+
+export const fetchLatestStories = async (size: number) => {
+    const response = await fetch(`${API_BASE_URL}/stories/list?page=1&size=${size}&sort_by_latest=true`);
+    const data = await response.json();
+    return data.data;
+};
+
+export const fetchFullStories = async (size: number) => {
+    const response = await fetch(`${API_BASE_URL}/stories/list?page=1&size=${size}&is_full=true`);
+    const data = await response.json();
+    return data.data;
+};

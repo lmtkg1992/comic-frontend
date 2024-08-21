@@ -1,40 +1,56 @@
-import StoryList from '../components/StoryList';
+// pages/index.tsx
 import CategoryNavigate from '../components/CategoryNavigate';
-import { fetchStories, fetchCategories } from '../utils/api';
-
-import { Story } from '../types/Story';
+import HotStories from '@/src/components/HomePage/HotStories';
+import LatestStories from '@/src/components/HomePage/LatestStories';
+import FullStories from '@/src/components/HomePage/FullStories';
+import CategorySideBar from '../components/CategorySideBar';
+import { fetchCategories } from '../utils/api';
 import { Category } from '../types/Category';
-import HomePageStoryList from "@/src/components/HomePageStoryList";
+
 interface Props {
     categories: Category[];
-    stories: Story[];
 }
-export async function getServerSideProps() {
 
+export async function getServerSideProps() {
     const categories = await fetchCategories();
-    const stories = await fetchStories();
 
     return {
         props: {
             categories,
-            stories
         },
     };
 }
 
-const HomePage: React.FC<Props> = ({categories, stories }) => {
+const HomePage: React.FC<Props> = ({ categories }) => {
     return (
-        <body>
-        <CategoryNavigate categories={categories} />
-        <main className="main-body">
-            <div className="container">
-                <div className="hot-story">
-                    <div className="title-list">TRUYỆN HOT</div>
-                    <HomePageStoryList stories={stories} />
+        <div>
+            <CategoryNavigate categories={categories} />
+            <main className="main-body">
+                <div className="container">
+                    <div className="homepage">
+                        <div className="container-row">
+                            <div className="full-column">
+                                <HotStories />
+                            </div>
+                        </div>
+                        <div className="container-row">
+                            <div className="left-column">
+                                <LatestStories />
+                            </div>
+                            <div className="right-column">
+                                <CategorySideBar typeCategory="category" />
+                            </div>
+                        </div>
+                        <div className="container-row">
+                            <div className="full-column">
+                                <FullStories />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </main>
-        </body>
+            </main>
+        </div>
     );
 };
+
 export default HomePage;
