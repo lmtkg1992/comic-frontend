@@ -7,28 +7,35 @@ import { fetchHotStories, fetchCategoriesByType } from '../../utils/api';
 const HotStories: React.FC = () => {
     const [stories, setStories] = useState<Story[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string>('');
+
+    const loadStories = async (categoryId = '') => {
+        const data = await fetchHotStories(16, categoryId); // Limit to 16 stories with optional category ID
+        setStories(data.list);
+    };
 
     useEffect(() => {
-        const loadStories = async () => {
-            const data = await fetchHotStories(16); // Limit to 16 stories
-            setStories(data.list);
-        };
-
         const loadCategories = async () => {
             const data = await fetchCategoriesByType('category');
             setCategories(data);
         };
 
-        loadStories();
+        loadStories(); // Load all stories initially
         loadCategories();
     }, []);
+
+    const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const categoryId = event.target.value;
+        setSelectedCategory(categoryId);
+        loadStories(categoryId); // Load stories based on selected category
+    };
 
     return (
         <div className="hot-story">
             <div className="hot-story-header">
                 <h2>TRUYỆN HOT <span className="glyphicon glyphicon-fire"></span></h2>
                 <div className="category-dropdown">
-                    <select>
+                    <select value={selectedCategory} onChange={handleCategoryChange}>
                         <option value="">TẤT CẢ</option>
                         {categories.map((category) => (
                             <option key={category.category_id} value={category.category_id}>

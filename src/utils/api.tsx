@@ -25,8 +25,9 @@ export const fetchCategoriesByType = async (typeCategory: string) => {
     return data.data.list;
 };
 
-export const fetchStoriesByCategory = async (categoryId: string, page = 1, size = 10) => {
-    const response = await fetch(`${API_BASE_URL}/stories/list_by_category/${categoryId}?page=${page}&size=${size}`);
+export const fetchStoriesByCategory = async (categoryId: string, page: number = 1, size: number = 10, sortByLatest: boolean = false) => {
+    const sortParam = sortByLatest ? '&sort_by_latest=true' : '';
+    const response = await fetch(`${API_BASE_URL}/stories/list_by_category/${categoryId}?page=${page}&size=${size}${sortParam}`);
     const data = await response.json();
     return data.data;
 };
@@ -67,12 +68,14 @@ export const fetchStoriesByTitle = async (title: string, page = 1, size = 10) =>
     return data.data;
 };
 
-// src/utils/api.tsx
-export const fetchHotStories = async (size: number) => {
-    const response = await fetch(`${API_BASE_URL}/top_stories/list_by_period/all?size=${size}`);
+
+export const fetchHotStories = async (size: number, categoryId: string = '') => {
+    const categoryParam = categoryId ? `&category_id=${categoryId}` : '';
+    const response = await fetch(`${API_BASE_URL}/top_stories/list_by_period/all?size=${size}${categoryParam}`);
     const data = await response.json();
     return data.data;
 };
+
 
 export const fetchLatestStories = async (size: number) => {
     const response = await fetch(`${API_BASE_URL}/stories/list?page=1&size=${size}&sort_by_latest=true`);
