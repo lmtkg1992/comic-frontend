@@ -126,49 +126,92 @@
           }
         }
       }
+
       .right-column {
         flex: 1;
         margin-left: 20px;
+
         .top-story {
           h2 {
-            font-size: 20px;
+            font-size: 21px;
             font-weight: 700;
             margin-bottom: 20px;
+            border-bottom: 1px solid rgba(20, 66, 93, 0.5);
+            padding-bottom: 10px;
           }
+
           .top-story-filter {
             display: flex;
             margin-bottom: 20px;
+
             div {
               cursor: pointer;
-              padding: 5px 10px;
+              padding: 5px 15px;
               border: 1px solid #14425d;
-              margin-right: 5px;
+              border-radius: 15px;
+              margin-right: 10px;
+              font-weight: bold;
+              font-size: 14px;
+              background-color: #fff;
+              color: #14425d;
+              transition: all 0.3s ease;
+
               &.active {
+                background-color: #14425d;
+                color: #fff;
+              }
+
+              &:hover {
                 background-color: #14425d;
                 color: #fff;
               }
             }
           }
+
           .top-story-item {
-            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start; /* Align the number and title at the top */
+            margin-bottom: 15px;
+
             div {
               display: flex;
-              align-items: center;
+              align-items: flex-start;
+
               .top-story-num {
-                font-size: 24px;
-                font-weight: 700;
+                width: 30px;
+                height: 30px;
+                background-color: #f44336;
+                color: #fff;
+                font-weight: bold;
+                font-size: 16px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 margin-right: 10px;
               }
+
               .top-story-num-title {
+                display: flex;
+                flex-direction: column; /* Make sure the title and meta stack vertically */
                 h3 {
-                  font-size: 18px;
+                  font-size: 16px;
+                  font-weight: 600;
+                  margin: 0;
                   a {
+                    color: #333;
                     text-decoration: none;
-                    color: #14425d;
                     &:hover {
                       text-decoration: underline;
                     }
                   }
+                }
+
+                /* Ensure the story-meta goes directly under the title */
+                .story-meta {
+                  font-size: 14px;
+                  color: #888;
+                  margin-top: 5px;
                 }
               }
             }

@@ -88,3 +88,9 @@ export const fetchFullStories = async (size: number) => {
     const data = await response.json();
     return data.data;
 };
+
+export const fetchTopStoriesByPeriod = async (period: 'day' | 'month' | 'all', size: number) => {
+    const response = await fetch(`${API_BASE_URL}/top_stories/list_by_period/${period}?size=${size}`);
+    const data = await response.json();
+    return data.data;
+};

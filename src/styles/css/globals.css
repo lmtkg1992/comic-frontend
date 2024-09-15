@@ -4727,7 +4727,7 @@ input:-webkit-autofill:focus {
   padding: 10px 200px;
   /* Add some padding */
   color: #4E4E4E;
-  background: url(//static.8cache.com/img/bg.jpg) top center repeat-x #F4F4F4;
+  background: url(//yeutruyen.s3.ap-southeast-1.amazonaws.com/images/bg.jpg) top center repeat-x #F4F4F4;
 }
 .main-body .container .hot-story .title-list {
   font-size: 20px;
@@ -4883,9 +4883,11 @@ input:-webkit-autofill:focus {
   margin-left: 20px;
 }
 .main-body .container .story-detail .right-column .top-story h2 {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 700;
   margin-bottom: 20px;
+  border-bottom: 1px solid rgba(20, 66, 93, 0.5);
+  padding-bottom: 10px;
 }
 .main-body .container .story-detail .right-column .top-story .top-story-filter {
   display: flex;
@@ -4893,35 +4895,69 @@ input:-webkit-autofill:focus {
 }
 .main-body .container .story-detail .right-column .top-story .top-story-filter div {
   cursor: pointer;
-  padding: 5px 10px;
+  padding: 5px 15px;
   border: 1px solid #14425d;
-  margin-right: 5px;
+  border-radius: 15px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  background-color: #fff;
+  color: #14425d;
+  transition: all 0.3s ease;
 }
 .main-body .container .story-detail .right-column .top-story .top-story-filter div.active {
   background-color: #14425d;
   color: #fff;
 }
+.main-body .container .story-detail .right-column .top-story .top-story-filter div:hover {
+  background-color: #14425d;
+  color: #fff;
+}
 .main-body .container .story-detail .right-column .top-story .top-story-item {
-  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  /* Align the number and title at the top */
+  margin-bottom: 15px;
 }
 .main-body .container .story-detail .right-column .top-story .top-story-item div {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num {
-  font-size: 24px;
-  font-weight: 700;
+  width: 30px;
+  height: 30px;
+  background-color: #f44336;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 10px;
 }
+.main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num-title {
+  display: flex;
+  flex-direction: column;
+  /* Make sure the title and meta stack vertically */
+  /* Ensure the story-meta goes directly under the title */
+}
 .main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num-title h3 {
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
 }
 .main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num-title h3 a {
+  color: #333;
   text-decoration: none;
-  color: #14425d;
 }
 .main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num-title h3 a:hover {
   text-decoration: underline;
+}
+.main-body .container .story-detail .right-column .top-story .top-story-item div .top-story-num-title .story-meta {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
 }
 .main-body .container .chapter-header {
   text-align: center;

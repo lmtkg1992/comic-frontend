@@ -5,6 +5,7 @@ import { fetchStoryDetailByUrlKey, fetchCategories, fetchChapters } from '../../
 import { Story, Chapter } from '../../types/Chapter';
 import { Category } from '../../types/Category';
 import CategoryNavigate from '../../components/CategoryNavigate';
+import TopStories from '../../components/StoryDetail/TopStories';
 
 interface StoryDetailProps {
     story: Story | null;
@@ -136,34 +137,7 @@ const StoryDetail: React.FC<StoryDetailProps> = ({ story, categories, chapters, 
                             </div>
                         </div>
                         <div className="right-column">
-                            <div className="top-story">
-                                <h2>TRUYỆN ĐANG HOT</h2>
-                                <div className="top-story-filter">
-                                    <div className="active">Ngày</div>
-                                    <div>Tháng</div>
-                                    <div>All time</div>
-                                </div>
-                                <div className="top-story-item">
-                                    <div>
-                                        <div className="top-story-num">1</div>
-                                        <div className="top-story-num-title">
-                                            <h3>
-                                                <a href="https://truyenfull.vn/than-dao-dan-ton-6060282/" title="Thần Đạo Đan Tôn">Thần Đạo Đan Tôn</a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="top-story-item">
-                                    <div>
-                                        <div className="top-story-num">2</div>
-                                        <div className="top-story-num-title">
-                                            <h3>
-                                                <a href="https://truyenfull.vn/than-dao-dan-ton-6060282/" title="Thần Đạo Đan Tôn">Thần Đạo Đan Tôn</a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <TopStories />
                         </div>
                     </div>
                 </div>
