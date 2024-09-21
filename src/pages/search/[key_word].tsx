@@ -1,5 +1,6 @@
 // src/pages/search/[key_word].tsx
-import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { fetchStoriesByTitle, fetchCategories } from '../../utils/api';
 import { Story } from '../../types/Chapter';
 import { Category } from '../../types/Category';
@@ -8,15 +9,55 @@ import StoryList from '../../components/StoryList';
 import CategorySideBar from '../../components/CategorySideBar';
 import { STORIES_PER_PAGE } from '../../utils/config';
 
-interface SearchResultsProps {
-    key_word: string;
-    initialStories: Story[];
-    categories: Category[];
-    initialTotalPages: number;
-}
+const SearchResults: React.FC = () => {
+    const router = useRouter();
+    const { key_word } = router.query;
 
-const SearchResults: React.FC<SearchResultsProps> = ({ key_word, initialStories, categories, initialTotalPages }) => {
-    const fetchStories = (page: number) => fetchStoriesByTitle(key_word, page, STORIES_PER_PAGE);
+    const [stories, setStories] = useState<Story[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (key_word) {
+                try {
+                    setLoading(true);
+
+                    const fetchedCategories = await fetchCategories();
+                    setCategories(fetchedCategories);
+
+                    const { list: fetchedStories, total_page: fetchedTotalPages } = await fetchStoriesByTitle(
+                        key_word as string,
+                        1,
+                        STORIES_PER_PAGE
+                    );
+                    setStories(fetchedStories);
+                    setTotalPages(fetchedTotalPages);
+                } catch (error) {
+                    console.error('Error fetching search results:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
+
+        fetchData();
+    }, [key_word]);
+
+    const fetchStories = (page: number) => fetchStoriesByTitle(key_word as string, page, STORIES_PER_PAGE);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (!stories.length) {
+        return (
+            <main>
+                <p>No stories found for "{key_word}".</p>
+            </main>
+        );
+    }
 
     return (
         <div>
@@ -28,13 +69,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ key_word, initialStories,
                             <h2>KẾT QUẢ TÌM KIẾM CHO TỪ KHÓA: {key_word}</h2>
                             <StoryList
                                 fetchMethod={fetchStories}
-                                initialStories={initialStories}
-                                initialTotalPages={initialTotalPages}
+                                initialStories={stories}
+                                initialTotalPages={totalPages}
                             />
                         </div>
                         <div className="right-column">
                             <div className="category-info">
-                                {`Danh sách truyện phù hợp với từ khóa ${key_word}`}
+                                {`Danh sách truyện phù hợp với từ khóa "${key_word}"`}
                             </div>
                             <CategorySideBar typeCategory="category" />
                         </div>
@@ -43,32 +84,6 @@ const SearchResults: React.FC<SearchResultsProps> = ({ key_word, initialStories,
             </main>
         </div>
     );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { key_word } = context.params || {};
-    if (!key_word) {
-        return {
-            props: {
-                key_word: '',
-                initialStories: [],
-                categories: [],
-                initialTotalPages: 0,
-            },
-        };
-    }
-
-    const categories = await fetchCategories();
-    const { list: initialStories, total_page: initialTotalPages } = await fetchStoriesByTitle(key_word as string, 1, STORIES_PER_PAGE);
-
-    return {
-        props: {
-            key_word,
-            initialStories,
-            categories,
-            initialTotalPages,
-        },
-    };
 };
 
 export default SearchResults;

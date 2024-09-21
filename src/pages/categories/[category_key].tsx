@@ -1,5 +1,6 @@
 // src/pages/categories/[category_key].tsx
-import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { fetchCategoryDetailByUrlKey, fetchStoriesByCategory, fetchCategories } from '../../utils/api';
 import { Story } from '../../types/Chapter';
 import { Category } from '../../types/Category';
@@ -8,14 +9,49 @@ import StoryList from '../../components/StoryList';
 import CategorySideBar from '../../components/CategorySideBar';
 import { STORIES_PER_PAGE } from '../../utils/config';
 
-interface CategoryDetailProps {
-    category: Category | null;
-    initialStories: Story[];
-    categories: Category[];
-    initialTotalPages: number;
-}
+const CategoryDetail: React.FC = () => {
+    const router = useRouter();
+    const { category_key } = router.query;
 
-const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, initialStories, categories, initialTotalPages }) => {
+    const [category, setCategory] = useState<Category | null>(null);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [initialStories, setInitialStories] = useState<Story[]>([]);
+    const [initialTotalPages, setInitialTotalPages] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (category_key) {
+                try {
+                    setLoading(true);
+                    const fetchedCategory = await fetchCategoryDetailByUrlKey(category_key as string);
+                    if (fetchedCategory) {
+                        setCategory(fetchedCategory);
+                        const { list: stories, total_page: totalPages } = await fetchStoriesByCategory(
+                            fetchedCategory.category_id,
+                            1,
+                            STORIES_PER_PAGE
+                        );
+                        setInitialStories(stories);
+                        setInitialTotalPages(totalPages);
+                    }
+                    const fetchedCategories = await fetchCategories();
+                    setCategories(fetchedCategories);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
+
+        fetchData();
+    }, [category_key]);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
     if (!category) {
         return (
             <main>
@@ -51,44 +87,6 @@ const CategoryDetail: React.FC<CategoryDetailProps> = ({ category, initialStorie
             </main>
         </div>
     );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { category_key } = context.params || {};
-    if (!category_key) {
-        return {
-            props: {
-                category: null,
-                initialStories: [],
-                categories: [],
-                initialTotalPages: 0,
-            },
-        };
-    }
-
-    const category = await fetchCategoryDetailByUrlKey(category_key as string);
-    if (!category) {
-        return {
-            props: {
-                category: null,
-                initialStories: [],
-                categories: [],
-                initialTotalPages: 0,
-            },
-        };
-    }
-
-    const categories = await fetchCategories();
-    const { list: initialStories, total_page: initialTotalPages } = await fetchStoriesByCategory(category.category_id, 1, STORIES_PER_PAGE);
-
-    return {
-        props: {
-            category,
-            initialStories,
-            categories,
-            initialTotalPages,
-        },
-    };
 };
 
 export default CategoryDetail;

@@ -1,5 +1,6 @@
 // src/pages/authors/[author_key].tsx
-import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { fetchAuthorDetailByUrlKey, fetchStoriesByAuthor, fetchCategories } from '../../utils/api';
 import { Story } from '../../types/Chapter';
 import { Category } from '../../types/Category';
@@ -8,14 +9,68 @@ import StoryList from '../../components/StoryList';
 import CategorySideBar from '../../components/CategorySideBar';
 import { STORIES_PER_PAGE } from '../../utils/config';
 
-interface AuthorDetailProps {
-    author: any | null;
-    initialStories: Story[];
-    categories: Category[];
-    initialTotalPages: number;
-}
+const AuthorDetail: React.FC = () => {
+    const router = useRouter();
+    const { author_key } = router.query;
 
-const AuthorDetail: React.FC<AuthorDetailProps> = ({ author, initialStories, categories, initialTotalPages }) => {
+    const [author, setAuthor] = useState<any | null>(null);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [stories, setStories] = useState<Story[]>([]);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    // Fetch categories and author details when the page loads or when author_key changes
+    useEffect(() => {
+        if (!author_key) return;
+
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+
+                // Fetch categories
+                const categoriesData = await fetchCategories();
+                setCategories(categoriesData);
+
+                // Fetch author details
+                const authorData = await fetchAuthorDetailByUrlKey(author_key as string);
+                setAuthor(authorData);
+
+                // Fetch stories by author for the first page
+                const { list, total_page } = await fetchStoriesByAuthor(authorData.author_id, 1, STORIES_PER_PAGE);
+                setStories(list);
+                setTotalPages(total_page);
+
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching author details or stories:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [author_key]);
+
+    // The fetchStories method now returns the data in the format expected by StoryList.
+    const fetchStories = async (page: number) => {
+        try {
+            const { list, total_page } = await fetchStoriesByAuthor(author.author_id, page, STORIES_PER_PAGE);
+            return {
+                list,
+                total_page,
+            };
+        } catch (error) {
+            console.error('Error fetching stories:', error);
+            return {
+                list: [],
+                total_page: 0,
+            };
+        }
+    };
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
     if (!author) {
         return (
             <main>
@@ -23,8 +78,6 @@ const AuthorDetail: React.FC<AuthorDetailProps> = ({ author, initialStories, cat
             </main>
         );
     }
-
-    const fetchStories = (page: number) => fetchStoriesByAuthor(author.author_id, page, STORIES_PER_PAGE);
 
     return (
         <div>
@@ -36,8 +89,8 @@ const AuthorDetail: React.FC<AuthorDetailProps> = ({ author, initialStories, cat
                             <h2>{author.title}</h2>
                             <StoryList
                                 fetchMethod={fetchStories}
-                                initialStories={initialStories}
-                                initialTotalPages={initialTotalPages}
+                                initialStories={stories}
+                                initialTotalPages={totalPages}
                             />
                         </div>
                         <div className="right-column">
@@ -51,33 +104,6 @@ const AuthorDetail: React.FC<AuthorDetailProps> = ({ author, initialStories, cat
             </main>
         </div>
     );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { author_key } = context.params || {};
-    if (!author_key) {
-        return {
-            props: {
-                author: null,
-                initialStories: [],
-                categories: [],
-                initialTotalPages: 0,
-            },
-        };
-    }
-
-    const author = await fetchAuthorDetailByUrlKey(author_key as string);
-    const categories = await fetchCategories();
-    const { list: initialStories, total_page: initialTotalPages } = await fetchStoriesByAuthor(author.author_id, 1, STORIES_PER_PAGE);
-
-    return {
-        props: {
-            author,
-            initialStories,
-            categories,
-            initialTotalPages,
-        },
-    };
 };
 
 export default AuthorDetail;

@@ -1,4 +1,5 @@
 // pages/index.tsx
+import { useEffect, useState } from 'react';
 import CategoryNavigate from '../components/CategoryNavigate';
 import HotStories from '@/src/components/HomePage/HotStories';
 import LatestStories from '@/src/components/HomePage/LatestStories';
@@ -7,21 +8,31 @@ import CategorySideBar from '../components/CategorySideBar';
 import { fetchCategories } from '../utils/api';
 import { Category } from '../types/Category';
 
-interface Props {
-    categories: Category[];
-}
+const HomePage: React.FC = () => {
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
-export async function getServerSideProps() {
-    const categories = await fetchCategories();
+    useEffect(() => {
+        // Fetch categories on the client side
+        const fetchCategoriesData = async () => {
+            try {
+                setLoading(true);
+                const categoriesData = await fetchCategories();
+                setCategories(categoriesData);
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    return {
-        props: {
-            categories,
-        },
-    };
-}
+        fetchCategoriesData();
+    }, []);
 
-const HomePage: React.FC<Props> = ({ categories }) => {
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
     return (
         <div>
             <CategoryNavigate categories={categories} />

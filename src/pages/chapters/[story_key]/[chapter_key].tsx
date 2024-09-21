@@ -1,18 +1,56 @@
 // src/pages/chapters/[story_key]/[chapter_key].tsx
-import { GetServerSideProps } from 'next';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { fetchChapterDetailByUrl, fetchStoryDetailByUrlKey, fetchCategories, fetchChapters } from '../../../utils/api';
 import { Chapter, Story } from '../../../types/Chapter';
 import CategoryNavigate from '../../../components/CategoryNavigate';
 import { Category } from '../../../types/Category';
 
-interface ChapterDetailProps {
-    chapter: Chapter | null;
-    categories: Category[];
-    story: Story | null;
-    chapters: Chapter[];
-}
+const ChapterDetail: React.FC = () => {
+    const router = useRouter();
+    const { story_key, chapter_key } = router.query;
 
-const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, story, chapters }) => {
+    const [chapter, setChapter] = useState<Chapter | null>(null);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [story, setStory] = useState<Story | null>(null);
+    const [chapters, setChapters] = useState<Chapter[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (story_key && chapter_key) {
+                try {
+                    setLoading(true);
+
+                    const fetchedCategories = await fetchCategories();
+                    setCategories(fetchedCategories);
+
+                    const fetchedStory = await fetchStoryDetailByUrlKey(story_key as string);
+                    setStory(fetchedStory);
+
+                    const fetchedChapter = await fetchChapterDetailByUrl(story_key as string, chapter_key as string);
+                    setChapter(fetchedChapter);
+
+                    if (fetchedStory) {
+                        const { list: fetchedChapters } = await fetchChapters(fetchedStory.story_id, 1, fetchedStory.total_chapters);
+                        setChapters(fetchedChapters);
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
+
+        fetchData();
+    }, [story_key, chapter_key]);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
     if (!chapter || !story) {
         return (
             <main>
@@ -21,7 +59,7 @@ const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, stor
         );
     }
 
-    const { title, content, ordered, short_title } = chapter;
+    const { title, content, ordered } = chapter;
 
     return (
         <div>
@@ -76,38 +114,6 @@ const ChapterDetail: React.FC<ChapterDetailProps> = ({ chapter, categories, stor
             </main>
         </div>
     );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const categories = await fetchCategories();
-
-    const { story_key, chapter_key } = context.params || {};
-    if (!story_key || !chapter_key) {
-        return {
-            props: {
-                chapter: null,
-                categories,
-                story: null,
-                chapters: [],
-            },
-        };
-    }
-
-    const storyKey = Array.isArray(story_key) ? story_key[0] : story_key;
-    const chapterKey = Array.isArray(chapter_key) ? chapter_key[0] : chapter_key;
-
-    const story = await fetchStoryDetailByUrlKey(storyKey);
-    const chapter = await fetchChapterDetailByUrl(storyKey, chapterKey);
-    const { list: chapters } = await fetchChapters(story.story_id,1,story.total_chapters);
-
-    return {
-        props: {
-            chapter,
-            categories,
-            story,
-            chapters,
-        },
-    };
 };
 
 export default ChapterDetail;
