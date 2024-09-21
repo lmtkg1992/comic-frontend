@@ -1,5 +1,4 @@
 import '../styles/css/globals.css';
-import '../styles/css/bootstrap.min.css';
 import '../styles/css/bootstrap-glyphicons.css';
 
 import type { AppProps } from 'next/app';
