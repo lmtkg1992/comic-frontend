@@ -52,50 +52,6 @@
 }
 /* border-radius */
 /* placeholder */
-.form-switch {
-  min-height: 1.75rem;
-}
-.custom-file-input .form-control {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-.custom-file-input .form-control + label {
-  color: #141416;
-  display: inline-block;
-  border: 1px solid #D4D7DE;
-  border-radius: 4px;
-  padding: 9px 14px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  width: 8.75rem;
-  text-align: center;
-}
-.custom-file-input .form-control + label:hover {
-  border-color: #141416;
-}
-.form-switch .form-check-input {
-  background-color: #D4D7DE;
-  border-color: #D4D7DE;
-  background-image: url(../images/icon-circle-w.svg);
-  width: 2.625rem;
-  height: 1.5rem;
-}
-.form-switch .form-check-input:focus {
-  border-color: #D4D7DE;
-  background-color: #D4D7DE;
-  box-shadow: none;
-  background-image: url(../images/icon-circle-w.svg);
-}
-.form-switch .form-check-input:checked {
-  background-color: #DA291C;
-  border-color: #DA291C;
-}
 .header {
   /* MEDIA QUERY FOR MOBILE */
 }
