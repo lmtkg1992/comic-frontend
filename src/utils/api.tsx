@@ -2,11 +2,11 @@
 const API_BASE_URL = 'http://localhost:8083';
 const API_ES_URL = 'http://localhost:8084';
 
-export const fetchStories = async () => {
-    const response = await fetch(`${API_BASE_URL}/stories/list`);
-    const data = await response.json();
-    return data.data.list;
-};
+// export const fetchStories = async () => {
+//     const response = await fetch(`${API_BASE_URL}/stories/list`);
+//     const data = await response.json();
+//     return data.data.list;
+// };
 
 export const fetchCategories = async () => {
     const response = await fetch(`${API_ES_URL}/categories/list`);
@@ -46,13 +46,13 @@ export const fetchChapterDetailByUrl = async (storyKey: string, chapterKey: stri
 };
 
 export const fetchChapters = async (storyId: string, page = 1, size = 50) => {
-    const response = await fetch(`${API_BASE_URL}/chapters/list/${storyId}?page=${page}&size=${size}`);
+    const response = await fetch(`${API_ES_URL}/chapters/list/${storyId}?page=${page}&size=${size}`);
     const data = await response.json();
     return data.data;
 };
 
 export const fetchAuthorDetailByUrlKey = async (urlKey: string) => {
-    const response = await fetch(`${API_BASE_URL}/authors/detail_by_url_key/${urlKey}`);
+    const response = await fetch(`${API_ES_URL}/authors/detail_by_url_key/${urlKey}`);
     const data = await response.json();
     return data;
 };
@@ -69,15 +69,6 @@ export const fetchStoriesByTitle = async (title: string, page = 1, size = 10) =>
     return data.data;
 };
 
-
-export const fetchHotStories = async (size: number, categoryId: string = '') => {
-    const categoryParam = categoryId ? `&category_id=${categoryId}` : '';
-    const response = await fetch(`${API_BASE_URL}/top_stories/list_by_period/all?size=${size}${categoryParam}`);
-    const data = await response.json();
-    return data.data;
-};
-
-
 export const fetchLatestStories = async (size: number) => {
     const response = await fetch(`${API_ES_URL}/stories/list?page=1&size=${size}&sort_by_latest=true`);
     const data = await response.json();
@@ -86,6 +77,13 @@ export const fetchLatestStories = async (size: number) => {
 
 export const fetchFullStories = async (size: number) => {
     const response = await fetch(`${API_ES_URL}/stories/list?page=1&size=${size}&is_full=true`);
+    const data = await response.json();
+    return data.data;
+};
+
+export const fetchHotStories = async (size: number, categoryId: string = '') => {
+    const categoryParam = categoryId ? `&category_id=${categoryId}` : '';
+    const response = await fetch(`${API_BASE_URL}/top_stories/list_by_period/all?size=${size}${categoryParam}`);
     const data = await response.json();
     return data.data;
 };
