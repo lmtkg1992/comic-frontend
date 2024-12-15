@@ -1,20 +1,18 @@
 // src/pages/authors/[author_key].tsx
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { fetchAuthorDetailByUrlKey, fetchStoriesByAuthor, fetchCategories } from '../../utils/api';
-import { Story } from '../../types/Chapter';
-import { Category } from '../../types/Category';
-import CategoryNavigate from '../../components/CategoryNavigate';
+import { fetchAuthorDetailByUrlKey, fetchStoriesByAuthor } from '../../utils/api';
+import { Story } from '../../types/Chapter';   
 import StoryList from '../../components/StoryList';
-import CategorySideBar from '../../components/CategorySideBar';
 import { STORIES_PER_PAGE } from '../../utils/config';
+import StaticCategorySideBar from '../../components/StaticCategorySideBar'; 
+import StaticCategoryNavigate from '@/src/components/StaticCategoryNavigate';
 
 const AuthorDetail: React.FC = () => {
     const router = useRouter();
     const { author_key } = router.query;
 
     const [author, setAuthor] = useState<any | null>(null);
-    const [categories, setCategories] = useState<Category[]>([]);
     const [stories, setStories] = useState<Story[]>([]);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
@@ -26,10 +24,6 @@ const AuthorDetail: React.FC = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-
-                // Fetch categories
-                const categoriesData = await fetchCategories();
-                setCategories(categoriesData);
 
                 // Fetch author details
                 const authorData = await fetchAuthorDetailByUrlKey(author_key as string);
@@ -81,7 +75,7 @@ const AuthorDetail: React.FC = () => {
 
     return (
         <div>
-            <CategoryNavigate categories={categories} />
+            <StaticCategoryNavigate />  
             <main className="main-body">
                 <div className="container">
                     <div className="category-detail">
@@ -97,7 +91,7 @@ const AuthorDetail: React.FC = () => {
                             <div className="category-info">
                                 {`Danh sách truyện của tác giả ${author.title}`}
                             </div>
-                            <CategorySideBar typeCategory="category" />
+                            <StaticCategorySideBar typeCategory="category" />
                         </div>
                     </div>
                 </div>

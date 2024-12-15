@@ -2,8 +2,8 @@
 import HotStories from '@/src/components/HomePage/HotStories';
 import LatestStories from '@/src/components/HomePage/LatestStories';
 import FullStories from '@/src/components/HomePage/FullStories';
-import CategorySideBar from '../components/CategorySideBar';
 import StaticCategoryNavigate from '../components/StaticCategoryNavigate';
+import StaticCategorySideBar from '../components/StaticCategorySideBar';
 
 const HomePage: React.FC = () => {
 
@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
                                 <LatestStories />
                             </div>
                             <div className="right-column">
-                                <CategorySideBar typeCategory="category" />
+                                <StaticCategorySideBar typeCategory="category" />
                             </div>
                         </div>
                         <div className="container-row">

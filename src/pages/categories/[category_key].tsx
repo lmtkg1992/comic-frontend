@@ -1,13 +1,13 @@
 // src/pages/categories/[category_key].tsx
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { fetchCategoryDetailByUrlKey, fetchStoriesByCategory, fetchCategories } from '../../utils/api';
+import { fetchCategoryDetailByUrlKey, fetchStoriesByCategory } from '../../utils/api';
 import { Story } from '../../types/Chapter';
 import { Category } from '../../types/Category';
 import StoryList from '../../components/StoryList';
-import CategorySideBar from '../../components/CategorySideBar';
 import { STORIES_PER_PAGE } from '../../utils/config';
 import StaticCategoryNavigate from '../../components/StaticCategoryNavigate';
+import StaticCategorySideBar from '../../components/StaticCategorySideBar';
 
 const CategoryDetail: React.FC = () => {
     const router = useRouter();
@@ -77,7 +77,7 @@ const CategoryDetail: React.FC = () => {
                             <div className="category-info">
                                 {category.description || `Danh sách truyện của danh mục ${category.title}`}
                             </div>
-                            <CategorySideBar typeCategory="category" />
+                            <StaticCategorySideBar typeCategory="category" />
                         </div>
                     </div>
                 </div>

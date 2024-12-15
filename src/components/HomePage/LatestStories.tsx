@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import { Story } from '../../types/Chapter';
 import { Category } from '../../types/Category';
-import { fetchLatestStories, fetchCategoriesByType, fetchStoriesByCategory } from '../../utils/api';
+import { fetchLatestStories, fetchStoriesByCategory } from '../../utils/api';
+import categoriesData from '../../data/categories.json';
 
 const LatestStories: React.FC = () => {
     const [stories, setStories] = useState<Story[]>([]);
@@ -20,13 +21,8 @@ const LatestStories: React.FC = () => {
     };
 
     useEffect(() => {
-        const loadCategories = async () => {
-            const data = await fetchCategoriesByType('category');
-            setCategories(data);
-        };
-
+        setCategories(categoriesData.filter((category) => category.type_category === 'category'));
         loadStories(); // Load all stories initially
-        loadCategories();
     }, []);
 
     const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { fetchStoriesByTitle } from '../../utils/api';
 import { Story } from '../../types/Chapter';
 import StaticCategoryNavigate from '../../components/StaticCategoryNavigate';
+import StaticCategorySideBar from '../../components/StaticCategorySideBar';
 import StoryList from '../../components/StoryList';
-import CategorySideBar from '../../components/CategorySideBar';
 import { STORIES_PER_PAGE } from '../../utils/config';
 
 const SearchResults: React.FC = () => {
@@ -72,7 +72,7 @@ const SearchResults: React.FC = () => {
                             <div className="category-info">
                                 {`Danh sách truyện phù hợp với từ khóa "${key_word}"`}
                             </div>
-                            <CategorySideBar typeCategory="category" />
+                            <StaticCategorySideBar typeCategory="category" />
                         </div>
                     </div>
                 </div>

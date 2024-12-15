@@ -1,0 +1,461 @@
+[
+    {
+        "category_id": "0dc2eb70-080a-467b-96b3-5c23fe3d9710",
+        "description": "",
+        "increment_id": 38,
+        "priority": 1,
+        "title": "Truyện Full",
+        "type_category": "good_list",
+        "url_key": "truyen-full"
+    },
+    {
+        "category_id": "d8f81c5c-5319-40e5-99d3-bb9960386fe5",
+        "description": "",
+        "increment_id": 1,
+        "priority": 1,
+        "title": "Tiên Hiệp",
+        "type_category": "category",
+        "url_key": "tien-hiep"
+    },
+    {
+        "category_id": "22de4bb3-36bd-425f-9d87-9115ae1fe8fd",
+        "description": "",
+        "increment_id": 2,
+        "priority": 2,
+        "title": "Kiếm Hiệp",
+        "type_category": "category",
+        "url_key": "kiem-hiep"
+    },
+    {
+        "category_id": "184c2384-0eed-42ca-a285-9ec70da684b9",
+        "description": "",
+        "increment_id": 39,
+        "priority": 2,
+        "title": "Tiên Hiệp Hay",
+        "type_category": "good_list",
+        "url_key": "tien-hiep-hay"
+    },
+    {
+        "category_id": "7228e98d-f347-4d7a-8427-a4bc27999084",
+        "description": "",
+        "increment_id": 40,
+        "priority": 3,
+        "title": "Kiếm Hiệp Hay",
+        "type_category": "good_list",
+        "url_key": "kiem-hiep-hay"
+    },
+    {
+        "category_id": "6110055d-1210-4fa0-9bc6-c18477fd919d",
+        "description": "",
+        "increment_id": 3,
+        "priority": 3,
+        "title": "Ngôn Tình",
+        "type_category": "category",
+        "url_key": "ngon-tinh"
+    },
+    {
+        "category_id": "e5621877-06b5-4b83-9a4e-9d2a729b1735",
+        "description": "",
+        "increment_id": 4,
+        "priority": 4,
+        "title": "Đam Mỹ",
+        "type_category": "category",
+        "url_key": "dam-my"
+    },
+    {
+        "category_id": "3adced7e-820e-4553-baba-f540715c15c2",
+        "description": "",
+        "increment_id": 41,
+        "priority": 4,
+        "title": "Truyện Teen Hay",
+        "type_category": "good_list",
+        "url_key": "truyen-teen-hay"
+    },
+    {
+        "category_id": "1dc896c7-89b3-4611-9b0e-d2f8a1f0044c",
+        "description": "",
+        "increment_id": 5,
+        "priority": 5,
+        "title": "Quan Trường",
+        "type_category": "category",
+        "url_key": "quan-truong"
+    },
+    {
+        "category_id": "95d033cd-a56d-4ef6-885e-5bb0596c3a73",
+        "description": "",
+        "increment_id": 42,
+        "priority": 5,
+        "title": "Ngôn Tình Hay",
+        "type_category": "good_list",
+        "url_key": "ngon-tinh-hay"
+    },
+    {
+        "category_id": "7c874cc2-216f-4c7a-bc53-cda684196381",
+        "description": "",
+        "increment_id": 43,
+        "priority": 6,
+        "title": "Ngôn Tình Ngược",
+        "type_category": "good_list",
+        "url_key": "ngon-tinh-nguoc"
+    },
+    {
+        "category_id": "d925968d-7319-4ae3-a44c-9efc57c0c084",
+        "description": "",
+        "increment_id": 6,
+        "priority": 6,
+        "title": "Võng Du",
+        "type_category": "category",
+        "url_key": "vong-du"
+    },
+    {
+        "category_id": "5c2de57d-0135-4a04-b822-10af761a7dd2",
+        "description": "",
+        "increment_id": 44,
+        "priority": 7,
+        "title": "Ngôn Tình Sủng",
+        "type_category": "good_list",
+        "url_key": "ngon-tinh-sung"
+    },
+    {
+        "category_id": "35fe79e5-1db1-47e4-979b-1a1d26ed3893",
+        "description": "",
+        "increment_id": 7,
+        "priority": 7,
+        "title": "Khoa Huyễn",
+        "type_category": "category",
+        "url_key": "khoa-huyen"
+    },
+    {
+        "category_id": "de08d176-4444-4644-9a81-a5c0b790f0dc",
+        "description": "",
+        "increment_id": 45,
+        "priority": 8,
+        "title": "Ngôn Tình Hài",
+        "type_category": "good_list",
+        "url_key": "ngon-tinh-hai"
+    },
+    {
+        "category_id": "3a147e8a-19d2-4931-97fe-bdf473dbade5",
+        "description": "",
+        "increment_id": 8,
+        "priority": 8,
+        "title": "Hệ Thống",
+        "type_category": "category",
+        "url_key": "he-thong"
+    },
+    {
+        "category_id": "3c96a8ab-5e6e-4fb4-80d2-8d96c7fcfff3",
+        "description": "",
+        "increment_id": 9,
+        "priority": 9,
+        "title": "Huyền Huyễn",
+        "type_category": "category",
+        "url_key": "huyen-huyen"
+    },
+    {
+        "category_id": "eb0eac8f-75f7-4c21-8ed3-f2cd1c2059cb",
+        "description": "",
+        "increment_id": 46,
+        "priority": 9,
+        "title": "Đam Mỹ Hài",
+        "type_category": "good_list",
+        "url_key": "dam-my-hai"
+    },
+    {
+        "category_id": "7f752dd0-1ebc-4ca5-a2d4-05b433b6de8c",
+        "description": "",
+        "increment_id": 10,
+        "priority": 10,
+        "title": "Dị Giới",
+        "type_category": "category",
+        "url_key": "di-gioi"
+    },
+    {
+        "category_id": "868b8dbc-4288-4d0a-9cac-3126b0eb85fb",
+        "description": "",
+        "increment_id": 47,
+        "priority": 10,
+        "title": "Đam Mỹ Hay",
+        "type_category": "good_list",
+        "url_key": "dam-my-hay"
+    },
+    {
+        "category_id": "459b0d46-5f46-4a3f-bbfe-702e526fc044",
+        "description": "",
+        "increment_id": 48,
+        "priority": 11,
+        "title": "Đam Mỹ H Văn",
+        "type_category": "good_list",
+        "url_key": "dam-my-h-van"
+    },
+    {
+        "category_id": "9b8a2fcd-2f85-4d82-8dff-10476bc4a598",
+        "description": "",
+        "increment_id": 11,
+        "priority": 11,
+        "title": "Dị Năng",
+        "type_category": "category",
+        "url_key": "di-nang"
+    },
+    {
+        "category_id": "6ef70e54-0aa4-4f92-a559-3b1c843e26dc",
+        "description": "",
+        "increment_id": 49,
+        "priority": 12,
+        "title": "Đam Mỹ Sắc",
+        "type_category": "good_list",
+        "url_key": "dam-my-sac"
+    },
+    {
+        "category_id": "369efa8c-578b-4052-af13-e967e7c350ed",
+        "description": "",
+        "increment_id": 12,
+        "priority": 12,
+        "title": "Quân Sự",
+        "type_category": "category",
+        "url_key": "quan-su"
+    },
+    {
+        "category_id": "6013d04e-b129-4409-94b7-1e81300c39a0",
+        "description": "",
+        "increment_id": 13,
+        "priority": 13,
+        "title": "Lịch Sử",
+        "type_category": "category",
+        "url_key": "lich-su"
+    },
+    {
+        "category_id": "0a2d61c3-1ce7-418b-b71f-3c9512ea80e5",
+        "description": "",
+        "increment_id": 14,
+        "priority": 14,
+        "title": "Xuyên Không",
+        "type_category": "category",
+        "url_key": "xuyen-khong"
+    },
+    {
+        "category_id": "6faa7296-1f8d-44d9-b308-1a2eaf39ddc7",
+        "description": "",
+        "increment_id": 15,
+        "priority": 15,
+        "title": "Xuyên Nhanh",
+        "type_category": "category",
+        "url_key": "xuyen-nhanh"
+    },
+    {
+        "category_id": "39f28b0b-37b6-4b05-8dac-e540ab92623a",
+        "description": "",
+        "increment_id": 16,
+        "priority": 16,
+        "title": "Trọng Sinh",
+        "type_category": "category",
+        "url_key": "trong-sinh"
+    },
+    {
+        "category_id": "3c76fa0e-d66d-49f4-bf54-81223bb57a18",
+        "description": "",
+        "increment_id": 17,
+        "priority": 17,
+        "title": "Trinh Thám",
+        "type_category": "category",
+        "url_key": "trinh-tham"
+    },
+    {
+        "category_id": "aea14669-a368-4874-8745-0eec7215f6d4",
+        "description": "",
+        "increment_id": 18,
+        "priority": 18,
+        "title": "Thám Hiểm",
+        "type_category": "category",
+        "url_key": "tham-hiem"
+    },
+    {
+        "category_id": "e59b63ff-f200-4917-88d4-3846cd6ef5a5",
+        "description": "",
+        "increment_id": 19,
+        "priority": 19,
+        "title": "Linh Dị",
+        "type_category": "category",
+        "url_key": "linh-di"
+    },
+    {
+        "category_id": "cc60df50-6aec-4b7a-ac4f-157d1656051a",
+        "description": "",
+        "increment_id": 20,
+        "priority": 20,
+        "title": "Sắc",
+        "type_category": "category",
+        "url_key": "sac"
+    },
+    {
+        "category_id": "128c8c96-8df1-4208-81d3-9858cc0923f8",
+        "description": "",
+        "increment_id": 21,
+        "priority": 21,
+        "title": "Ngược",
+        "type_category": "category",
+        "url_key": "nguoc"
+    },
+    {
+        "category_id": "81710b88-a0b0-4a9d-b82f-d847d8903764",
+        "description": "",
+        "increment_id": 22,
+        "priority": 22,
+        "title": "Sủng",
+        "type_category": "category",
+        "url_key": "sung"
+    },
+    {
+        "category_id": "c26f3157-e9b8-48be-97ae-9a0fe75e6afc",
+        "description": "",
+        "increment_id": 23,
+        "priority": 23,
+        "title": "Cung Đấu",
+        "type_category": "category",
+        "url_key": "cung-dau"
+    },
+    {
+        "category_id": "146be9d1-544f-4123-b539-49e80b1faf14",
+        "description": "",
+        "increment_id": 24,
+        "priority": 24,
+        "title": "Nữ Cường",
+        "type_category": "category",
+        "url_key": "nu-cuong"
+    },
+    {
+        "category_id": "7d5590e8-1878-4e4c-bc97-d82cc81b390f",
+        "description": "",
+        "increment_id": 25,
+        "priority": 25,
+        "title": "Gia Đấu",
+        "type_category": "category",
+        "url_key": "gia-dau"
+    },
+    {
+        "category_id": "c3391568-22b3-4a28-8b35-6208c99a2261",
+        "description": "",
+        "increment_id": 26,
+        "priority": 26,
+        "title": "Đông Phương",
+        "type_category": "category",
+        "url_key": "dong-phuong"
+    },
+    {
+        "category_id": "db866411-075e-4ac6-b880-d9b8b9df3504",
+        "description": "",
+        "increment_id": 27,
+        "priority": 27,
+        "title": "Đô Thị",
+        "type_category": "category",
+        "url_key": "do-thi"
+    },
+    {
+        "category_id": "0927b942-455b-4564-92fa-313cb11128d1",
+        "description": "",
+        "increment_id": 28,
+        "priority": 28,
+        "title": "Bách Hợp",
+        "type_category": "category",
+        "url_key": "bach-hop"
+    },
+    {
+        "category_id": "b1441bd6-536f-4ef4-9a8e-921f675bf11b",
+        "description": "",
+        "increment_id": 29,
+        "priority": 29,
+        "title": "Hài Hước",
+        "type_category": "category",
+        "url_key": "hai-huoc"
+    },
+    {
+        "category_id": "e2bd3bae-7b88-42a2-9b8e-58b24c38e169",
+        "description": "",
+        "increment_id": 30,
+        "priority": 30,
+        "title": "Điền Văn",
+        "type_category": "category",
+        "url_key": "dien-van"
+    },
+    {
+        "category_id": "d326a59e-91b3-4e9e-b6bf-7f4b695d4004",
+        "description": "",
+        "increment_id": 31,
+        "priority": 31,
+        "title": "Cổ Đại",
+        "type_category": "category",
+        "url_key": "co-dai"
+    },
+    {
+        "category_id": "b249e3a0-2bb7-46af-8ca1-4fcfde5c2677",
+        "description": "",
+        "increment_id": 32,
+        "priority": 32,
+        "title": "Mạt Thế",
+        "type_category": "category",
+        "url_key": "mat-the"
+    },
+    {
+        "category_id": "4c37b6b8-fde2-4cfd-aff8-f8aaa5ead35f",
+        "description": "",
+        "increment_id": 33,
+        "priority": 33,
+        "title": "Truyện Teen",
+        "type_category": "category",
+        "url_key": "truyen-teen"
+    },
+    {
+        "category_id": "d82c382f-8622-4595-b37f-6c1805a8cfc1",
+        "description": "",
+        "increment_id": 34,
+        "priority": 34,
+        "title": "Phương Tây",
+        "type_category": "category",
+        "url_key": "phuong-tay"
+    },
+    {
+        "category_id": "e3d0c1d2-4cfc-4e35-bc65-4d69bfcf36c1",
+        "description": "",
+        "increment_id": 35,
+        "priority": 35,
+        "title": "Nữ Phụ",
+        "type_category": "category",
+        "url_key": "nu-phu"
+    },
+    {
+        "category_id": "4525526a-9341-4367-9287-54819f9e83b4",
+        "description": "",
+        "increment_id": 36,
+        "priority": 36,
+        "title": "Light Novel",
+        "type_category": "category",
+        "url_key": "light-novel"
+    },
+    {
+        "category_id": "4ff97edb-bf63-46ef-b21c-1f4fff71a8f1",
+        "description": "",
+        "increment_id": 37,
+        "priority": 37,
+        "title": "Việt Nam",
+        "type_category": "category",
+        "url_key": "viet-nam"
+    },
+    {
+        "category_id": "68e6dc05-c456-433e-9b10-cfe63d37c94b",
+        "description": "",
+        "increment_id": 38,
+        "priority": 38,
+        "title": "Đoản Văn",
+        "type_category": "category",
+        "url_key": "doan-van"
+    },
+    {
+        "category_id": "f7601891-c75d-4e18-bcc3-2fb1f22be99e",
+        "description": "",
+        "increment_id": 39,
+        "priority": 39,
+        "title": "Khác",
+        "type_category": "category",
+        "url_key": "khac"
+    }
+]
