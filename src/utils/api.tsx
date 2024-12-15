@@ -28,7 +28,7 @@ export const fetchCategoriesByType = async (typeCategory: string) => {
 
 export const fetchStoriesByCategory = async (categoryId: string, page: number = 1, size: number = 10, sortByLatest: boolean = false) => {
     const sortParam = sortByLatest ? '&sort_by_latest=true' : '';
-    const response = await fetch(`${API_ES_URL}/stories/list_by_category/${categoryId}?page=${page}&size=${size}${sortParam}`);
+    const response = await fetch(`${API_ES_URL}/stories/by_category/${categoryId}?page=${page}&size=${size}${sortParam}`);
     const data = await response.json();
     return data.data;
 };

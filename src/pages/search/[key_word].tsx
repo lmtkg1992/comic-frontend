@@ -1,10 +1,9 @@
 // src/pages/search/[key_word].tsx
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { fetchStoriesByTitle, fetchCategories } from '../../utils/api';
+import { fetchStoriesByTitle } from '../../utils/api';
 import { Story } from '../../types/Chapter';
-import { Category } from '../../types/Category';
-import CategoryNavigate from '../../components/CategoryNavigate';
+import StaticCategoryNavigate from '../../components/StaticCategoryNavigate';
 import StoryList from '../../components/StoryList';
 import CategorySideBar from '../../components/CategorySideBar';
 import { STORIES_PER_PAGE } from '../../utils/config';
@@ -14,7 +13,6 @@ const SearchResults: React.FC = () => {
     const { key_word } = router.query;
 
     const [stories, setStories] = useState<Story[]>([]);
-    const [categories, setCategories] = useState<Category[]>([]);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -23,9 +21,6 @@ const SearchResults: React.FC = () => {
             if (key_word) {
                 try {
                     setLoading(true);
-
-                    const fetchedCategories = await fetchCategories();
-                    setCategories(fetchedCategories);
 
                     const { list: fetchedStories, total_page: fetchedTotalPages } = await fetchStoriesByTitle(
                         key_word as string,
@@ -61,7 +56,7 @@ const SearchResults: React.FC = () => {
 
     return (
         <div>
-            <CategoryNavigate categories={categories} />
+            <StaticCategoryNavigate />
             <main className="main-body">
                 <div className="container">
                     <div className="category-detail">

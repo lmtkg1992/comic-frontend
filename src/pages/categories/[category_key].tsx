@@ -4,17 +4,16 @@ import { useRouter } from 'next/router';
 import { fetchCategoryDetailByUrlKey, fetchStoriesByCategory, fetchCategories } from '../../utils/api';
 import { Story } from '../../types/Chapter';
 import { Category } from '../../types/Category';
-import CategoryNavigate from '../../components/CategoryNavigate';
 import StoryList from '../../components/StoryList';
 import CategorySideBar from '../../components/CategorySideBar';
 import { STORIES_PER_PAGE } from '../../utils/config';
+import StaticCategoryNavigate from '../../components/StaticCategoryNavigate';
 
 const CategoryDetail: React.FC = () => {
     const router = useRouter();
     const { category_key } = router.query;
 
     const [category, setCategory] = useState<Category | null>(null);
-    const [categories, setCategories] = useState<Category[]>([]);
     const [initialStories, setInitialStories] = useState<Story[]>([]);
     const [initialTotalPages, setInitialTotalPages] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
@@ -35,8 +34,6 @@ const CategoryDetail: React.FC = () => {
                         setInitialStories(stories);
                         setInitialTotalPages(totalPages);
                     }
-                    const fetchedCategories = await fetchCategories();
-                    setCategories(fetchedCategories);
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 } finally {
@@ -64,7 +61,7 @@ const CategoryDetail: React.FC = () => {
 
     return (
         <div>
-            <CategoryNavigate categories={categories} />
+            <StaticCategoryNavigate />
             <main className="main-body">
                 <div className="container">
                     <div className="category-detail">

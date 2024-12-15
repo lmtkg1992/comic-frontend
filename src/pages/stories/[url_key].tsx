@@ -1,18 +1,15 @@
 // src/pages/stories/[url_key].tsx
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { fetchStoryDetailByUrlKey, fetchCategories, fetchChapters } from '../../utils/api';
+import { fetchStoryDetailByUrlKey, fetchChapters } from '../../utils/api';
 import { Story, Chapter } from '../../types/Chapter';
-import { Category } from '../../types/Category';
-import CategoryNavigate from '../../components/CategoryNavigate';
 import TopStories from '../../components/StoryDetail/TopStories';
-
+import StaticCategoryNavigate from '../../components/StaticCategoryNavigate';
 const StoryDetail: React.FC = () => {
     const router = useRouter();
     const { url_key } = router.query;
 
     const [story, setStory] = useState<Story | null>(null);
-    const [categories, setCategories] = useState<Category[]>([]);
     const [chapters, setChapters] = useState<Chapter[]>([]);
     const [totalChapters, setTotalChapters] = useState<number>(0);
     const [totalPages, setTotalPages] = useState<number>(0);
@@ -24,9 +21,6 @@ const StoryDetail: React.FC = () => {
             if (url_key) {
                 try {
                     setLoading(true);
-
-                    const fetchedCategories = await fetchCategories();
-                    setCategories(fetchedCategories);
 
                     const fetchedStory = await fetchStoryDetailByUrlKey(url_key as string);
                     if (fetchedStory) {
@@ -135,7 +129,7 @@ const StoryDetail: React.FC = () => {
 
     return (
         <div>
-            <CategoryNavigate categories={categories} />
+            <StaticCategoryNavigate />
             <main className="main-body">
                 <div className="container">
                     <div className="story-detail">
